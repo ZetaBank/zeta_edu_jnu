@@ -6,5 +6,5 @@ Here are the contents for this section:
 
 .. toctree:: 
 
-    9.follow_along_1
-    9.follow_along_2
+    2.follow_along_1
+    3.follow_along_2

@@ -75,6 +75,7 @@ In Education Provided by ZetaBank:
     lecture_courses/course_1/2.robot_control/1.index
     lecture_courses/course_1/3.ai_image_recognition/1.index
     lecture_courses/course_1/4.slam_navigation/1.index
+    lecture_courses/course_1/5.robot_arm_ex/1.index
 
 
 
@@ -86,6 +87,7 @@ In Education Provided by ZetaBank:
     lecture_courses/course_2/2.ai_pose_detect/1.index
     lecture_courses/course_2/3.robot_control_move/1.index
     lecture_courses/course_2/4.make_robot/1.index
+    lecture_courses/course_1/5.robot_arm_ex/1.index
    
 .. toctree:: 
     :caption: AI Robot Application & Utilization Academy
@@ -94,18 +96,15 @@ In Education Provided by ZetaBank:
     lecture_courses/course_3/1.index
     lecture_courses/course_3/2.robot_driving_ros/1.index
     lecture_courses/course_3/3.ai_segmentation_depth/1.index
-    lecture_courses/course_3/4.robot_arm_basic/1.index
+    lecture_courses/course_1/4.robot_arm_ex/1.index
 
 .. toctree:: 
     :maxdepth: 6
     :hidden:
     :caption: Future Industry: AI Robot Academy
     
-    robot_coding/day_three/1.robot_control/index
-    robot_coding/day_three/2.sematic_seg/index 
-    robot_coding/day_three/3.driving_ex/index
-    robot_coding/day_three/4.slam_nav/index
-    robot_coding/day_three/5.robot_arm_ex/index
+    robot_coding/day_three/2.robot_driving_ros/index
+    robot_coding/day_three/3.robot_arm_ex/index
 
 
 .. toctree::
