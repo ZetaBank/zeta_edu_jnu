@@ -1,0 +1,10 @@
+Dancing With Music
+=====================================
+
+
+Here are the contents for this section:
+
+.. toctree:: 
+
+    2.follow_along_1
+    3.follow_along_2
