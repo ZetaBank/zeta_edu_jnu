@@ -103,8 +103,9 @@ In Education Provided by ZetaBank:
     :hidden:
     :caption: Future Industry: AI Robot Academy
     
-    robot_coding/day_three/2.robot_driving_ros/index
-    robot_coding/day_three/3.robot_arm_ex/index
+    lecture_courses/course_4/1.index
+    lecture_courses/course_4/2.ai_tao/1.index
+    lecture_courses/course_4/3.robot_competition_ex/1.index
 
 
 .. toctree::
