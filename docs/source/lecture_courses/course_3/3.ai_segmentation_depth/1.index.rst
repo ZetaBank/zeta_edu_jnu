@@ -1,4 +1,4 @@
-sematic seg & Object Detect Examples
+sematic seg & Depth estimation Examples
 ================================================
 
 Here are the contents for this section:
