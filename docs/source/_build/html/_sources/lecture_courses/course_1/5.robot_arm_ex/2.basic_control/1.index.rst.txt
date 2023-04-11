@@ -1,4 +1,4 @@
-Basic Robot Arm Control
+Basic Control Examples
 ===========================
 
 Here are the follow along contents:

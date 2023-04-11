@@ -1,4 +1,4 @@
-Advanced Robot Arm Control
+Advanced Control Examples
 ============================
 
 Here are the follow along contents:

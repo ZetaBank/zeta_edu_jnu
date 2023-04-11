@@ -1,4 +1,4 @@
-Robot Arm
+Basic Robot Arm Control
 ===========
 
 
