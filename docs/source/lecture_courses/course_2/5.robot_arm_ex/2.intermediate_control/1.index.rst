@@ -1,4 +1,4 @@
-Intermediate Robot Arm Control
+Intermediate Control Examples
 ===========================
 
 Here are the follow along contents:
