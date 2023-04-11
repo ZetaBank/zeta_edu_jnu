@@ -62,17 +62,18 @@ mission_lib custom Library
 
 - mission_lib.py
 
-.. thumbnail:: /_images/ai_training/mission_lib_2-1.png
+.. thumbnail:: /_images/ai_training/mission_lib_pnp.png
 
 |
 
-- The ``mission_lib.py`` allows for functions that would control the robot arm movements.  
-  The python file itself contains Movement class with 3 initial variables
+- The ``mission_lib_pnp.py`` allows for functions that would control the robot arm movements.  
+  The python file itself contains Movement class with 5 initial variables
 
   - *Arm*: for storing the Arm_Device object (User Input when initializing the **Movement** object )
-  - *first_angle*: for storing angle information for the first servo (default value: 90)
-  - *third_angle*: for storing angle information for the third servo (default value: 45)
-  - *pincher_angle*: for storing angle information for the pincher (sixth) servo (default value: 90) 
+  - *release_angle*: for storing angle information for the gripper position is opened (default value: 30)
+  - *third_angle*: for storing angle information for the gripper position is closed (default value: 170)
+  - *initial_release_position*: for storing angle information for the six servos initial position with gripper is opened (default value: [90, 90, 0, 90, 90, self.release_angle])
+  - *initial_grap_position*: for storing angle information for the six servos initial position with gripper is closed (default value: [90, 90, 0, 90, 90, self.grap_angle]) 
 
   .. code-block:: python 
 
@@ -81,121 +82,91 @@ mission_lib custom Library
         Functions for robot arm movements
         
         :Arm: Robot Arm object
-        :first_angle: Angle for first servo
-        :third_angle: Angle for third servo
-        :time: The time length for the movement 
+        :release_angle: Angle when the gripper is opened
+        :grap_angle: Angle when the gripper is closed
+        :initial_release_position: Initial position with gripper is opened
+        :initial_grap_position: Initial position with gripper is closed
+        :time: The time length for the movement
         """
-        
+
         def __init__(self, Arm):
             self.Arm = Arm
-            self.first_angle = 90
-            self.third_angle = 45
-            self.pincher_angle = 90
+            self.release_angle = 30
+            self.grap_angle = 170
+            
+            self.initial_release_position = [90, 90, 0, 90, 90, self.release_angle]
+            self.initial_grap_position = [90, 90, 0, 90, 90, self.grap_angle]
 
-- There are total of 4 main functions for up, down, left, right movement and 2 minor functions for moving the pincher. 
-  All the functions recieve time parameter from the user. This defined how fast a movement is to be finished. On our main notebook, we pre-define 3 different time variables to be put into the functions.
+- There are total of 2 main functions for move the robot arm sequentially or reset the robot arm. 
+  All the functions recieve time parameter from the user. This defined how fast a movement is to be finished.
 
-  - Main function (Up, Down movements):
+  - Main function (reset the robot arm):
   
-    The functions responsible for up and down movements are (``move_up(self, time)``, ``move_down(self, time)``). 
-    These functions set 2nd and third servos in a fixed position and moves the 3 servo to a fixed angle everytime the function is called. 
-    I the angle of the third servo exceeds the given amount, the update will stop. 
+    The function to reset the robot arm is (``move_to_initial_position``).
+    This function returns the six servers to their initial release position.
 
     Example:
 
     .. code-block:: python
 
-        def move_up(self, time):
+        def move_to_initial_position(self, time) :
             """
-            Move the Robot Arm Up. If the limit is reached, stop the update. 
+            Move the Robot Arm to its initial position. 
             
             :param time: Movement time for the Robot Arm 
             :type: int
             
             """
-            
-            self.Arm.Arm_serial_servo_write(2, 90, time)
-            self.Arm.Arm_serial_servo_write(4, 45, time)
-            if self.third_angle >= 90: # Stop the update if the angle exceeds 90
-                self.Arm.Arm_serial_servo_write(3, self.third_angle, time)
-            else:
-                self.third_angle += 15 # Update the 3rd servo
-                self.Arm.Arm_serial_servo_write(3, self.third_angle, time)
 
-  - Main function (Left, Right movements):
+            self.Arm.Arm_serial_servo_write6_array(self.initial_release_position, time)
+            sleep(2)
+
+  - Main function (move the robot arm sequentially):
     
-    Unlike the Up and Down movement functions, the Left and Right movement function only updates the 1st servo which is responsible for turning the robot arm.  
-    Similar to Up and Down movement functions, the update will stop once the angle reaches or exceeds the specified amount. 
+    The function to sequentially move the robot arm is (``move_to_positions``).  
+    This function puts six positions into a list and executes them sequentially to perform a pick-and-place operation.
 
     Example:
 
     .. code-block:: python 
 
-        def move_left(self, time):
+        def move_to_positions(self, angle, time):
             """
-            Turn the Robot Arm to the left. If the limit is reached, stop the update. 
+            Rotates the robot arm by an angle. Designate 4 positions to pick and place and add them to the list.
             
-            :param time: Movement time for the Robot Arm 
+            :param time: Movement time for the Robot Arm
+            :param angle: Rotation angle for the Robot Arm 
             :type: int
             
             """
+
+            self.move_release_position = [angle, 90, 0, 90, 90, self.release_angle]
+            self.move_grap_position = [angle, 90, 0, 90, 90, self.grap_angle]
+            self.lower_release_position = [angle, 0, 45, 45, 90, self.release_angle]
+            self.lower_grap_position = [angle, 0, 45, 45, 90, self.grap_angle]
             
-            if self.first_angle >= 150:
-                self.first_angle = 180
-                self.Arm.Arm_serial_servo_write(1, self.first_angle, time)
-            else:
-                self.first_angle += 30
-                self.Arm.Arm_serial_servo_write(1, self.first_angle, time)
-
-
-  - Minor function (Pinchers)
-
-    The pinching and releasing functions activate the 6th servo which controls the pincher with specified amount. 
-
-    - Pincher (Pinch):
-
-      .. code-block:: python 
-
-        def move_pincher(self, time):
+            positions = [
+                self.initial_release_position, self.move_release_position, self.lower_release_position, 
+                self.lower_grap_position, self.move_grap_position, self.initial_grap_position
+            ]
             """
-            Pinch the pincher, If the limit is reached, stop the update. 
-            
-            :param time: Movement time for the Robot Arm 
-            :type: int
+            The robot arm sequentially moves through the positions in the list.
             
             """
-            if self.pincher_angle >= 165:
-                self.pincher_angle = 165
-                self.Arm.Arm_serial_servo_write(6, self.pincher_angle, time)
-            else:
-                self.pincher_angle += 5
-                self.Arm.Arm_serial_servo_write(6, self.pincher_angle, time)
+                
+            for position in positions:
+                self.Arm.Arm_serial_servo_write6_array(position, time)
+                sleep(2)
 
-
-    - Pincher (Release):
-
-      .. code-block:: python 
-
-        def release_pincher(self, time):
-            """
-            Pinch the pincher
-            
-            :param time: Movement time for the Robot Arm 
-            :type: int
-            
-            """
-            self.pincher_angle = 90
-            self.Arm.Arm_serial_servo_write(6, self.pincher_angle, time)
 
     
-
 event_name custom Library
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - event_name.py
 
 
-.. thumbnail:: /_images/ai_training/event_name.png
+.. thumbnail:: /_images/ai_training/event_name_pnp.png
 
 - This python library is responsbile for creating an action instance and providing settler funtions. 
 
@@ -212,22 +183,12 @@ event_name custom Library
         def __init__(self):
             self.action = 'stand_by'
             
-        def play_button_Callback(self, value):
-            self.action = 'Play Music'
-        def stop_button_Callback(self, value):
-            self.action = 'No Music'
-        def up_button_Callback(self, value):
-            self.action = 'Up'
-        def down_button_Callback(self, value):
-            self.action = 'Down'
-        def left_button_Callback(self, value):
-            self.action = 'Left'
-        def right_button_Callback(self, value):
-            self.action = 'Right'
-        def pinch_button_Callback(self, value):
-            self.action = 'Pinch'
-        def release_button_Callback(self, value):
-            self.action = 'Release'
+        def start_button_Callback(self, value):
+            self.action = 'Start'
+            
+        def reset_button_Callback(self, value):
+            self.action = 'Reset'
+            
         def exit_button_Callback(self, value):
             self.action = 'Exit'
         
@@ -239,11 +200,11 @@ Lets Start the Mission!!!
 ----------------------------
 
 
-Open the mission folder and open the mission.ipynb file.
+Open the mission folder and open the mission-pnp.ipynb file.
 
-- mission.ipynb
+- mission-pnp.ipynb
 
-.. thumbnail:: /_images/ai_training/mission.png
+.. thumbnail:: /_images/ai_training/mission_pnp.png
 
 -   Reset the Robot Arm control
 
