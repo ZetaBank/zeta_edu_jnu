@@ -11,10 +11,10 @@ Discussion
         </p>
         <ul>
             <li> 
-                
+                Discussion about robot and art.
                 <ul>
-                    <li></li>
-                    <li></li>
+                    <li>The impact of robotic technology on artists.</li>
+                    <li>Delicate and creative artistic depiction that only robots can do</li>
                 </ul>
             </li>
             
