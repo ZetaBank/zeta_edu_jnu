@@ -29,23 +29,23 @@ Here are the libraries needed for our Mission
     - OpenCV library for camera input and display streams. 
     - IPython.display for jupyter environment camera/ GUI output.
     - ipywidgets for creating widgets in GUI output.  
-    - event_name custom library for setting current action within GUI.  
+    - event_name_figure custom library for setting current action within GUI.  
     
     .. code-block:: python 
 
         import cv2 as cv
         from IPython.display import display
         import ipywidgets as widgets
-        from event_name import EventName
+        from event_name_figure import EventName
 
 - For robot arm movement controls we will import:
 
     - Arm_Lib library for the robot arm movement functions.
-    - mission_lib custom library for the robot arm movement controls.
+    - mission_lib_figure custom library for the robot arm movement controls.
 
     .. code-block:: python
 
-        from mission_lib import Movement
+        from mission_lib_figure import Movement
         import Arm_Lib
 
 - For Music controls we will import:
@@ -57,22 +57,24 @@ Here are the libraries needed for our Mission
         from pygame import mixer
 
 
-mission_lib custom Library
+mission_lib_figure custom Library
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- mission_lib.py
+- mission_lib_figure.py
 
-.. thumbnail:: /_images/ai_training/mission_lib_3-1.png
+.. thumbnail:: /_images/ai_training/mission_lib_figure.png
 
 |
 
-- The ``mission_lib.py`` allows for functions that would control the robot arm movements.  
-  The python file itself contains Movement class with 3 initial variables
+- The ``mission_lib_figure.py`` allows for functions that would control the robot arm movements.  
+  The python file itself contains Movement class with 6 initial variables
 
   - *Arm*: for storing the Arm_Device object (User Input when initializing the **Movement** object )
-  - *first_angle*: for storing angle information for the first servo (default value: 90)
-  - *third_angle*: for storing angle information for the third servo (default value: 45)
-  - *pincher_angle*: for storing angle information for the pincher (sixth) servo (default value: 90) 
+  - *initial_position*: for storing angle information for the six servos initial position (default value: [90, 90, 0, 90, 90, 170])
+  - *angle_range*: for calculating angles to draw a circle (default value: range(0, 361, 10))
+  - *circle_positions*: for storing angles where the robot arm moves to draw a circle sequentially
+  - *square_positions*: for storing angles where the robot arm moves to draw a square sequentially
+  - *triangle_positions*: for storing angles where the robot arm moves to draw a triangle sequentially
 
   .. code-block:: python 
 
@@ -81,121 +83,145 @@ mission_lib custom Library
         Functions for robot arm movements
         
         :Arm: Robot Arm object
-        :first_angle: Angle for first servo
-        :third_angle: Angle for third servo
-        :time: The time length for the movement 
+        :initial_position: Initial position
+        :angle_range: Used to calculate angles to draw a circle
+        :circle_positions: Stores the position where the robot arm moves to draw a circle
+        :square_positions: Stores the position where the robot arm moves to draw a square
+        :triangle_positions: Stores the position where the robot arm moves to draw a triangle
+        :time: The time length for the movement
         """
         
         def __init__(self, Arm):
             self.Arm = Arm
-            self.first_angle = 90
-            self.third_angle = 45
-            self.pincher_angle = 90
 
-- There are total of 4 main functions for up, down, left, right movement and 2 minor functions for moving the pincher. 
-  All the functions recieve time parameter from the user. This defined how fast a movement is to be finished. On our main notebook, we pre-define 3 different time variables to be put into the functions.
+            self.initial_position = [90, 90, 0, 90, 90, 170]
+            self.angle_range = range(0, 361, 10)
+            self.circle_positions = self.calculate_circle_positions
+            self.square_positions = self.calculate_square_positions
+            self.triangle_positions = self.calculate_triangle_positions
 
-  - Main function (Up, Down movements):
+- There are total of 4 main functions for calculate circle, rectangle, triangle coordinates, or reset the robot arm and 3 minor functions for move the robot arm with calculated coordinates.
+  All the functions recieve time parameter from the user. This defined how fast a movement is to be finished.
+ 
+  - Main function (reset the robot arm):
   
-    The functions responsible for up and down movements are (``move_up(self, time)``, ``move_down(self, time)``). 
-    These functions set 2nd and third servos in a fixed position and moves the 3 servo to a fixed angle everytime the function is called. 
-    I the angle of the third servo exceeds the given amount, the update will stop. 
+    The function to reset the robot arm is (``move_to_initial_position``).
+    This function returns the six servers to their initial release position.
+
+    Example:
+
+    .. code-block:: python
+        
+        def move_to_initial_position(self, time) :
+            """
+            Move the Robot Arm to its initial position. 
+            
+            :param time: Movement time for the Robot Arm 
+            :type: int
+            
+            """
+
+            self.Arm.Arm_serial_servo_write6_array(self.initial_position, time)
+            sleep(2)
+
+  - Main function (calculate circle, rectangle, triangle coordinates):
+  
+    The functions responsible for calculate are (``calculate_circle_positions``, ``calculate_square_positions``, ``calculate_triangle_positions``). 
+    These functions receives the variable length centered on the initial pose of the robot arm, calculates concentric circles, squares, and equilateral triangles according to the length, converts them into coordinates, and returns them to the position lists.
 
     Example:
 
     .. code-block:: python
 
-        def move_up(self, time):
+        def calculate_circle_positions(self, length):
             """
-            Move the Robot Arm Up. If the limit is reached, stop the update. 
+            Receive the radius and performs an operation to draw a concentric circle.
             
-            :param time: Movement time for the Robot Arm 
+            :param length: Concentric radius
             :type: int
             
             """
             
-            self.Arm.Arm_serial_servo_write(2, 90, time)
-            self.Arm.Arm_serial_servo_write(4, 45, time)
-            if self.third_angle >= 90: # Stop the update if the angle exceeds 90
-                self.Arm.Arm_serial_servo_write(3, self.third_angle, time)
-            else:
-                self.third_angle += 15 # Update the 3rd servo
-                self.Arm.Arm_serial_servo_write(3, self.third_angle, time)
-
-  - Main function (Left, Right movements):
-    
-    Unlike the Up and Down movement functions, the Left and Right movement function only updates the 1st servo which is responsible for turning the robot arm.  
-    Similar to Up and Down movement functions, the update will stop once the angle reaches or exceeds the specified amount. 
-
-    Example:
-
-    .. code-block:: python 
-
-        def move_left(self, time):
+            positions = []
+            for angle in self.angle_range:
+                x = self.initial_position[0] + length * math.cos(math.radians(angle))
+                y = self.initial_position[1] + length * math.sin(math.radians(angle))
+                positions.append([x, y, self.initial_position[2], self.initial_position[3], self.initial_position[4], self.initial_position[5]])
+            return positions
+        
+        def calculate_square_positions(self, length):
             """
-            Turn the Robot Arm to the left. If the limit is reached, stop the update. 
+            Receive the length of the base and perform an operation to draw a square.
             
-            :param time: Movement time for the Robot Arm 
+            :param length: Base of a square
             :type: int
             
             """
             
-            if self.first_angle >= 150:
-                self.first_angle = 180
-                self.Arm.Arm_serial_servo_write(1, self.first_angle, time)
-            else:
-                self.first_angle += 30
-                self.Arm.Arm_serial_servo_write(1, self.first_angle, time)
+            positions = [
+                [self.initial_position[0] - length/2, self.initial_position[1], self.initial_position[2] - length/2, self.initial_position[3], self.initial_position[4], self.initial_position[5]],    
+                [self.initial_position[0] + length/2, self.initial_position[1], self.initial_position[2] - length/2, self.initial_position[3], self.initial_position[4], self.initial_position[5]],
+                [self.initial_position[0] + length/2, self.initial_position[1], self.initial_position[2] + length/2, self.initial_position[3], self.initial_position[4], self.initial_position[5]],
+                [self.initial_position[0] - length/2, self.initial_position[1], self.initial_position[2] + length/2, self.initial_position[3], self.initial_position[4], self.initial_position[5]]
+            ]
+            return positions
+        
+        def calculate_triangle_positions(self, length):
+            """
+            Receive the length of the base and perform an operation to draw an equilateral triangle.
+            
+            :param length: Base of a equilateral triangle
+            :type: int
+            
+            """
+            
+            positions = [
+                [self.initial_position[0], self.initial_position[1], self.initial_position[2] - length * math.sqrt(3) / 6, self.initial_position[3], self.initial_position[4], self.initial_position[5]],
+                [self.initial_position[0] - length / 2, self.initial_position[1], self.initial_position[2] + length * math.sqrt(3) / 3, self.initial_position[3], self.initial_position[4], self.initial_position[5]],
+                [self.initial_position[0] + length / 2, self.initial_position[1], self.initial_position[2] + length * math.sqrt(3) / 3, self.initial_position[3], self.initial_position[4], self.initial_position[5]]
+            ]
+            return positions
 
 
-  - Minor function (Pinchers)
+  - Minor function (move the the robot arm sequentially):
 
-    The pinching and releasing functions activate the 6th servo which controls the pincher with specified amount. 
+    The functions responsible for move the joints of the robot arm sequentially in the order of coordinates are (``move_to_circle_positions``, ``move_to_square_positions``, ``move_to_triangle_positions``).
+    These functions receives lists calculated in the main function and sequentially moves the six servos of the robot arm.
 
     - Pincher (Pinch):
 
       .. code-block:: python 
 
-        def move_pincher(self, time):
-            """
-            Pinch the pincher, If the limit is reached, stop the update. 
+    
+        """
+        Move the joints of the robot arm in the order of the received positions
             
-            :param time: Movement time for the Robot Arm 
-            :type: int
-            
-            """
-            if self.pincher_angle >= 165:
-                self.pincher_angle = 165
-                self.Arm.Arm_serial_servo_write(6, self.pincher_angle, time)
-            else:
-                self.pincher_angle += 5
-                self.Arm.Arm_serial_servo_write(6, self.pincher_angle, time)
+        """
 
-
-    - Pincher (Release):
-
-      .. code-block:: python 
-
-        def release_pincher(self, time):
-            """
-            Pinch the pincher
-            
-            :param time: Movement time for the Robot Arm 
-            :type: int
-            
-            """
-            self.pincher_angle = 90
-            self.Arm.Arm_serial_servo_write(6, self.pincher_angle, time)
+        def move_to_circle_positions(self, length, time):
+            for position in self.circle_positions(length):
+                self.Arm.Arm_serial_servo_write6_array(position, time)
+                sleep(0.1)
+                
+        def move_to_square_positions(self, length, time):
+            for position in self.square_positions(length):
+                self.Arm.Arm_serial_servo_write6_array(position, time)
+                sleep(1)
+                    
+        def move_to_triangle_positions(self, length, time):
+            for position in self.triangle_positions(length):
+                self.Arm.Arm_serial_servo_write6_array(position, time)
+                sleep(1)
 
     
 
-event_name custom Library
+event_name_figure custom Library
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- event_name.py
+- event_name_figure.py
 
 
-.. thumbnail:: /_images/ai_training/event_name.png
+.. thumbnail:: /_images/ai_training/event_name_figure.png
 
 - This python library is responsbile for creating an action instance and providing settler funtions. 
 
@@ -212,22 +238,12 @@ event_name custom Library
         def __init__(self):
             self.action = 'stand_by'
             
-        def play_button_Callback(self, value):
-            self.action = 'Play Music'
-        def stop_button_Callback(self, value):
-            self.action = 'No Music'
-        def up_button_Callback(self, value):
-            self.action = 'Up'
-        def down_button_Callback(self, value):
-            self.action = 'Down'
-        def left_button_Callback(self, value):
-            self.action = 'Left'
-        def right_button_Callback(self, value):
-            self.action = 'Right'
-        def pinch_button_Callback(self, value):
-            self.action = 'Pinch'
-        def release_button_Callback(self, value):
-            self.action = 'Release'
+        def start_button_Callback(self, value):
+            self.action = 'Start'
+            
+        def reset_button_Callback(self, value):
+            self.action = 'Reset'
+
         def exit_button_Callback(self, value):
             self.action = 'Exit'
         
@@ -239,11 +255,11 @@ Lets Start the Mission!!!
 ----------------------------
 
 
-Open the mission folder and open the mission.ipynb file.
+Open the mission folder and open the mission-circle.ipynb file.
 
-- mission.ipynb
+- mission-circle.ipynb
 
-.. thumbnail:: /_images/ai_training/mission.png
+.. thumbnail:: /_images/ai_training/mission_circle.png
 
 -   Reset the Robot Arm control
 
@@ -255,179 +271,128 @@ Open the mission folder and open the mission.ipynb file.
 
 - First, import in the necessary libraries
 
-  .. code-block:: python
+.. code-block:: python
 
     import cv2 as cv
     import threading
-    import os
     from time import sleep
+    import math
     import ipywidgets as widgets
-    from mission_lib import Movement
-    from event_name import EventName
+    from mission_lib_figure import Movement
+    from event_name_figure import EventName
     from IPython.display import display
 
 - Import and initialize the Arm Device
 
-    .. code-block:: python
+.. code-block:: python
 
-        import Arm_Lib
-        Arm = Arm_Lib.Arm_Device()
-        joints_0 = [90, 90, 90, 90, 90, 90]
-        Arm.Arm_serial_servo_write6_array(joints_0, 1000)
+    import Arm_Lib
+    Arm = Arm_Lib.Arm_Device()
+
+    initial_position = [90, 90, 0, 90, 90, 30]
+    Arm.Arm_serial_servo_write6_array(initial_position, 1000)
 
 - Initialize the Movement and Event name objects. When initializing Movement object, provide the Arm object as the parameter. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        movement = Movement(Arm)
-        e = EventName()
-
-- Initialize the different speeds of the robot arm.
-
-    .. code-block:: python 
-
-        move_speed = {"Slow": 1500,
-                    "Regular": 1000,
-                    "Fast": 500}
-
+    e = EventName()
+    movement = Movement(Arm)
 
 - Create the GUI widgets:
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        button_layout = widgets.Layout(width='200px', height='60px', align_self='center')
-        short_layout = widgets.Layout(width='200px', height='75px', align_self='center')
+    button_layout = widgets.Layout(width='200px', height='60px', align_self='center')
 
-        output = widgets.Output()
+    output = widgets.Output()
 
-        choose_movement = widgets.ToggleButtons(options=['Slow', 'Regular', 'Fast'], button_style='success',
-                                                tooltips=['Description of slow', 'Description of regular', 'Description of fast'])
+    # Widgets
+    num_input = widgets.IntSlider(min=1, max=90, step=1, value=45, layout=button_layout) # Get the radius of the circle.
 
-        # Movement Widgets
-        pinch_button = widgets.Button(description='Pinch', button_style='success', layout=button_layout)
+    start_button = widgets.Button(description='Start', button_style='success', layout=button_layout)
 
-        release_button = widgets.Button(description='Release', button_style='primary', layout=button_layout)
+    reset_button = widgets.Button(description='Reset', button_style='primary', layout=button_layout)
 
-        up_button = widgets.Button(description='Up', button_style='primary', layout=short_layout)
+    exit_button = widgets.Button(description='Exit', button_style='danger', layout=button_layout)
 
-        down_button = widgets.Button(description='Down', button_style='primary', layout=short_layout)
+    imgbox = widgets.Image(format='jpg', height=480, width=640, layout=widgets.Layout(align_self='auto'))
 
-        left_button = widgets.Button(description='Left', button_style='primary', layout=short_layout)
+    img_box = widgets.VBox([imgbox], layout=widgets.Layout(align_self='auto'))
 
-        right_button = widgets.Button(description='Right', button_style='primary', layout=short_layout)
+    Slider_box = widgets.VBox([start_button, reset_button, exit_button, num_input], layout=widgets.Layout(align_self='auto'))
 
-        # Sound Widget
-
-        play_button = widgets.Button(description='Play Sound', button_style='success', layout=button_layout)
-
-        stop_button = widgets.Button(description='Stop Sound', button_style='success', layout=button_layout)
-
-        # Exit Widget
-        exit_button = widgets.Button(description='Exit', button_style='danger', layout=button_layout)
-
-        imgbox = widgets.Image(format='jpg', height=480, width=640, layout=widgets.Layout(align_self='auto'))
-
-        img_box = widgets.VBox([imgbox, choose_movement], layout=widgets.Layout(align_self='auto'))
-
-        Slider_box = widgets.VBox([pinch_button, release_button, play_button,stop_button, exit_button],
-                                layout=widgets.Layout(align_self='auto'))
-        Move_box = widgets.VBox([up_button, down_button, left_button, right_button],
-                                layout=widgets.Layout(align_self='auto'))
-
-        controls_box = widgets.HBox([img_box, Move_box, Slider_box], layout=widgets.Layout(align_self='auto'))
-        # ['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch', 'inherit', 'initial', 'unset']
+    controls_box = widgets.HBox([img_box, Slider_box], layout=widgets.Layout(align_self='auto'))
     
 - Create the event handlers for the widgets. We connect these handlers with our event name, so that when the user presses the buttons, the names of the action changes. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        play_button.on_click(e.play_button_Callback)
-        stop_button.on_click(e.stop_button_Callback)
-        pinch_button.on_click(e.pinch_button_Callback)
-        release_button.on_click(e.release_button_Callback)
-        up_button.on_click(e.up_button_Callback)
-        down_button.on_click(e.down_button_Callback)
-        left_button.on_click(e.left_button_Callback)
-        right_button.on_click(e.right_button_Callback)
-        exit_button.on_click(e.exit_button_Callback)
+    start_button.on_click(e.start_button_Callback)
+    reset_button.on_click(e.reset_button_Callback)
+    exit_button.on_click(e.exit_button_Callback)
     
 - Create the camera function, and open the camera of our robot arm. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        def camera():
-    
-            # Open camera
-            capture = cv.VideoCapture(1)
+    def camera():
+
+        # Open camera
+        capture = cv.VideoCapture(1)
 
 - To process the incoming frames from the capture variable, create a loop that will run as long as camera feed is open. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        # Be executed in loop when the camera is opened normally 
-        while capture.isOpened():
+    # Be executed in loop when the camera is opened normally 
+    while capture.isOpened():
     
-  - Within the loop grab the camera frame and resize it to (640, 480) using the *cv.resize* function. With the help of **if** function, listen to the action variable, and assign an appropriate function when the action variable is changed. 
+- Within the loop grab the camera frame and resize it to (640, 480) using the *cv.resize* function. With the help of **if** function, listen to the action variable, and assign an appropriate function when the action variable is changed. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        _, img = capture.read()
+    _, img = capture.read()
 
-        img = cv.resize(img, (640, 480))
+    img = cv.resize(img, (640, 480))
 
-        if e.action == 'Up':
-            movement.move_up(move_speed[choose_movement.value])
-            e.reset()
-        if e.action == 'Down':
-            movement.move_down(move_speed[choose_movement.value])
-            e.reset()
-        if e.action == 'Left':
-            movement.move_left(move_speed[choose_movement.value])
-            e.reset()
-        if e.action == 'Right':
-            movement.move_right(move_speed[choose_movement.value])
-            e.reset()
-        if e.action == 'Pinch':
-            movement.move_pincher(move_speed[choose_movement.value])
-            e.reset()
-        if e.action == 'Release':
-            movement.release_pincher(move_speed[choose_movement.value])
-            e.reset()
-        if e.action == 'Play Music':
-            os.system('rostopic pub -1 /robot_sound std_msgs/Int32MultiArray "data: [1.0, 0.0, 4.0]"')
-            e.reset()
-        if e.action == 'No Music':
-            os.system('rostopic pub -1 /robot_sound std_msgs/Int32MultiArray "data: [0.0, 0.0, 4.0]"')
-        if e.action == 'Exit':
-            cv.destroyAllWindows()
-            capture.release()
-            break
-        imgbox.value = cv.imencode('.jpg', img)[1].tobytes()
-        sleep(0.25)
+    if e.action == 'Start':
+        movement.move_to_circle_positions(num_input.value, 1000)
+        
+    if e.action == 'Reset':
+        movement.move_to_initial_position(1000)
+        e.reset()
+        
+    if e.action == 'Exit':
+        cv.destroyAllWindows()
+        capture.release()
+        break
+    imgbox.value = cv.imencode('.jpg', img)[1].tobytes()
+    sleep(0.25)
 
-  - Execute the camera() function. Since we are working with multiple different variables and functions, wrap the process within a threat.
+- Execute the camera() function. Since we are working with multiple different variables and functions, wrap the process within a threat.
 
-    .. code-block:: python 
+.. code-block:: python 
+    display(controls_box,output)
 
-        display(controls_box,output)
-        threading.Thread(target=camera, ).start()
+    threading.Thread(target=camera, ).start()
 
-  - Be sure to delete the robot , and reset the robot arm control after exiting the GUI. 
+- Be sure to delete the robot , and reset the robot arm control after exiting the GUI. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        del Arm
+    del Arm
 
-        %%capture
-        !pm2 stop 15
-        !pm2 start 14
+    %%capture
+    !pm2 stop 15
+    !pm2 start 14
 
-Pick up an object and place it somewhere else!
+Let's draw a picture with a robot arm!!!
 -------------------------------------------------
 
 Now that we have built our program, using the GUI control and grab an object and place it somewhere else. 
 
-.. thumbnail:: /_images/ai_training/gui.png
+.. thumbnail:: /_images/ai_training/gui_circle.png
     
  
 (**IMPORTANT**) 

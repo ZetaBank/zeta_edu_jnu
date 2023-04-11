@@ -294,29 +294,28 @@ Open the mission folder and open the mission-pnp.ipynb file.
     
 - Within the loop grab the camera frame and resize it to (640, 480) using the *cv.resize* function. With the help of **if** function, listen to the action variable, and assign an appropriate function when the action variable is changed. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        _, img = capture.read()
+    _, img = capture.read()
 
-        img = cv.resize(img, (640, 480))
+    img = cv.resize(img, (640, 480))
 
-        if e.action == 'Start':
-            movement.move_to_positions(angle_input.value, 1000)
-            e.reset()
+    if e.action == 'Start':
+        movement.move_to_positions(angle_input.value, 1000)
+        e.reset()
 
-        if e.action == 'Reset':
-            movement.move_to_initial_position(1000)
-            e.reset()
-            
-        if e.action == 'Exit':
-            cv.destroyAllWindows()
-            capture.release()
-            break
-        imgbox.value = cv.imencode('.jpg', img)[1].tobytes()
-        sleep(0.25)
-    except KeyboardInterrupt:capture.release()
+    if e.action == 'Reset':
+        movement.move_to_initial_position(1000)
+        e.reset()
+        
+    if e.action == 'Exit':
+        cv.destroyAllWindows()
+        capture.release()
+        break
+    imgbox.value = cv.imencode('.jpg', img)[1].tobytes()
+    sleep(0.25)
 
-  - Execute the camera() function. Since we are working with multiple different variables and functions, wrap the process within a threat.
+- Execute the camera() function. Since we are working with multiple different variables and functions, wrap the process within a threat.
 
 .. code-block:: python 
 
@@ -333,7 +332,7 @@ Open the mission folder and open the mission-pnp.ipynb file.
     !pm2 stop 15
     !pm2 start 14
 
-Pick up objects and place them automatically!
+Let's Pick up objects and place them automatically!!!
 -------------------------------------------------
 
 Now that we have built our program, using the GUI control and grab an object and place it somewhere else. 
