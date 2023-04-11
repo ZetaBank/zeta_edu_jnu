@@ -51,7 +51,7 @@ Open the mission folder and open the mission-dance.ipynb file.
 
 - mission-dance.ipynb
 
-.. thumbnail:: /_images/ai_training/mission-dance.png
+.. thumbnail:: /_images/ai_training/mission_dance.png
 
 -   Reset the Robot Arm control and Sound
 
