@@ -29,14 +29,14 @@ Here are the libraries needed for our Mission
     - OpenCV library for camera input and display streams. 
     - IPython.display for jupyter environment camera/ GUI output.
     - ipywidgets for creating widgets in GUI output.  
-    - event_name custom library for setting current action within GUI.  
+    - event_name_pnp custom library for setting current action within GUI.  
     
     .. code-block:: python 
 
         import cv2 as cv
         from IPython.display import display
         import ipywidgets as widgets
-        from event_name import EventName
+        from event_name_pnp import EventName
 
 - For robot arm movement controls we will import:
 
@@ -45,7 +45,7 @@ Here are the libraries needed for our Mission
 
     .. code-block:: python
 
-        from mission_lib import Movement
+        from mission_lib_pnp import Movement
         import Arm_Lib
 
 - For Music controls we will import:
@@ -57,10 +57,10 @@ Here are the libraries needed for our Mission
         from pygame import mixer
 
 
-mission_lib custom Library
+mission_lib_pnp custom Library
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- mission_lib.py
+- mission_lib_pnp.py
 
 .. thumbnail:: /_images/ai_training/mission_lib_pnp.png
 
@@ -71,7 +71,7 @@ mission_lib custom Library
 
   - *Arm*: for storing the Arm_Device object (User Input when initializing the **Movement** object )
   - *release_angle*: for storing angle information for the gripper position is opened (default value: 30)
-  - *third_angle*: for storing angle information for the gripper position is closed (default value: 170)
+  - *grap_angle*: for storing angle information for the gripper position is closed (default value: 170)
   - *initial_release_position*: for storing angle information for the six servos initial position with gripper is opened (default value: [90, 90, 0, 90, 90, self.release_angle])
   - *initial_grap_position*: for storing angle information for the six servos initial position with gripper is closed (default value: [90, 90, 0, 90, 90, self.grap_angle]) 
 
@@ -160,10 +160,10 @@ mission_lib custom Library
 
 
     
-event_name custom Library
+event_name_pnp custom Library
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- event_name.py
+- event_name_pnp.py
 
 
 .. thumbnail:: /_images/ai_training/event_name_pnp.png
@@ -216,119 +216,83 @@ Open the mission folder and open the mission-pnp.ipynb file.
 
 - First, import in the necessary libraries
 
-  .. code-block:: python
+.. code-block:: python
 
     import cv2 as cv
     import threading
-    import os
     from time import sleep
+    import math
     import ipywidgets as widgets
-    from mission_lib import Movement
-    from event_name import EventName
+    from mission_lib_pnp import Movement
+    from event_name_pnp import EventName
     from IPython.display import display
 
 - Import and initialize the Arm Device
 
-    .. code-block:: python
+.. code-block:: python
 
-        import Arm_Lib
-        Arm = Arm_Lib.Arm_Device()
-        joints_0 = [90, 90, 90, 90, 90, 90]
-        Arm.Arm_serial_servo_write6_array(joints_0, 1000)
+    import Arm_Lib
+    Arm = Arm_Lib.Arm_Device()
+
+    initial_position = [90, 90, 0, 90, 90, 30]
+    Arm.Arm_serial_servo_write6_array(initial_position, 1000)
 
 - Initialize the Movement and Event name objects. When initializing Movement object, provide the Arm object as the parameter. 
 
-    .. code-block:: python 
-
-        movement = Movement(Arm)
-        e = EventName()
-
-- Initialize the different speeds of the robot arm.
-
-    .. code-block:: python 
-
-        move_speed = {"Slow": 1500,
-                    "Regular": 1000,
-                    "Fast": 500}
-
+.. code-block:: python 
+    e = EventName()
+    movement = Movement(Arm)
 
 - Create the GUI widgets:
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        button_layout = widgets.Layout(width='200px', height='60px', align_self='center')
-        short_layout = widgets.Layout(width='200px', height='75px', align_self='center')
+    button_layout = widgets.Layout(width='200px', height='60px', align_self='center')
 
-        output = widgets.Output()
+    output = widgets.Output()
 
-        choose_movement = widgets.ToggleButtons(options=['Slow', 'Regular', 'Fast'], button_style='success',
-                                                tooltips=['Description of slow', 'Description of regular', 'Description of fast'])
+    # Widgets
+    angle_input = widgets.IntSlider(min=40, max=140, step=1, value=90, layout=button_layout ) # Get the rotation angle of the robot arm.
 
-        # Movement Widgets
-        pinch_button = widgets.Button(description='Pinch', button_style='success', layout=button_layout)
+    start_button = widgets.Button(description='Start', button_style='success', layout=button_layout)
 
-        release_button = widgets.Button(description='Release', button_style='primary', layout=button_layout)
+    reset_button = widgets.Button(description='Reset', button_style='primary', layout=button_layout)
 
-        up_button = widgets.Button(description='Up', button_style='primary', layout=short_layout)
+    exit_button = widgets.Button(description='Exit', button_style='danger', layout=button_layout)
 
-        down_button = widgets.Button(description='Down', button_style='primary', layout=short_layout)
+    imgbox = widgets.Image(format='jpg', height=480, width=640, layout=widgets.Layout(align_self='auto'))
 
-        left_button = widgets.Button(description='Left', button_style='primary', layout=short_layout)
+    img_box = widgets.VBox([imgbox], layout=widgets.Layout(align_self='auto'))
 
-        right_button = widgets.Button(description='Right', button_style='primary', layout=short_layout)
+    Slider_box = widgets.VBox([start_button, reset_button, exit_button, angle_input], layout=widgets.Layout(align_self='auto'))
 
-        # Sound Widget
-
-        play_button = widgets.Button(description='Play Sound', button_style='success', layout=button_layout)
-
-        stop_button = widgets.Button(description='Stop Sound', button_style='success', layout=button_layout)
-
-        # Exit Widget
-        exit_button = widgets.Button(description='Exit', button_style='danger', layout=button_layout)
-
-        imgbox = widgets.Image(format='jpg', height=480, width=640, layout=widgets.Layout(align_self='auto'))
-
-        img_box = widgets.VBox([imgbox, choose_movement], layout=widgets.Layout(align_self='auto'))
-
-        Slider_box = widgets.VBox([pinch_button, release_button, play_button,stop_button, exit_button],
-                                layout=widgets.Layout(align_self='auto'))
-        Move_box = widgets.VBox([up_button, down_button, left_button, right_button],
-                                layout=widgets.Layout(align_self='auto'))
-
-        controls_box = widgets.HBox([img_box, Move_box, Slider_box], layout=widgets.Layout(align_self='auto'))
-        # ['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch', 'inherit', 'initial', 'unset']
+    controls_box = widgets.HBox([img_box, Slider_box], layout=widgets.Layout(align_self='auto'))
     
 - Create the event handlers for the widgets. We connect these handlers with our event name, so that when the user presses the buttons, the names of the action changes. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        play_button.on_click(e.play_button_Callback)
-        stop_button.on_click(e.stop_button_Callback)
-        pinch_button.on_click(e.pinch_button_Callback)
-        release_button.on_click(e.release_button_Callback)
-        up_button.on_click(e.up_button_Callback)
-        down_button.on_click(e.down_button_Callback)
-        left_button.on_click(e.left_button_Callback)
-        right_button.on_click(e.right_button_Callback)
-        exit_button.on_click(e.exit_button_Callback)
+    start_button.on_click(e.start_button_Callback)
+    reset_button.on_click(e.reset_button_Callback)
+    exit_button.on_click(e.exit_button_Callback)
     
 - Create the camera function, and open the camera of our robot arm. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        def camera():
-    
-            # Open camera
-            capture = cv.VideoCapture(1)
+    def camera():
+
+        # Open camera
+        capture = cv.VideoCapture(1)
 
 - To process the incoming frames from the capture variable, create a loop that will run as long as camera feed is open. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        # Be executed in loop when the camera is opened normally 
-        while capture.isOpened():
+    # Be executed in loop when the camera is opened normally 
+    while capture.isOpened():
     
-  - Within the loop grab the camera frame and resize it to (640, 480) using the *cv.resize* function. With the help of **if** function, listen to the action variable, and assign an appropriate function when the action variable is changed. 
+- Within the loop grab the camera frame and resize it to (640, 480) using the *cv.resize* function. With the help of **if** function, listen to the action variable, and assign an appropriate function when the action variable is changed. 
 
     .. code-block:: python 
 
@@ -336,61 +300,47 @@ Open the mission folder and open the mission-pnp.ipynb file.
 
         img = cv.resize(img, (640, 480))
 
-        if e.action == 'Up':
-            movement.move_up(move_speed[choose_movement.value])
+        if e.action == 'Start':
+            movement.move_to_positions(angle_input.value, 1000)
             e.reset()
-        if e.action == 'Down':
-            movement.move_down(move_speed[choose_movement.value])
+
+        if e.action == 'Reset':
+            movement.move_to_initial_position(1000)
             e.reset()
-        if e.action == 'Left':
-            movement.move_left(move_speed[choose_movement.value])
-            e.reset()
-        if e.action == 'Right':
-            movement.move_right(move_speed[choose_movement.value])
-            e.reset()
-        if e.action == 'Pinch':
-            movement.move_pincher(move_speed[choose_movement.value])
-            e.reset()
-        if e.action == 'Release':
-            movement.release_pincher(move_speed[choose_movement.value])
-            e.reset()
-        if e.action == 'Play Music':
-            os.system('rostopic pub -1 /robot_sound std_msgs/Int32MultiArray "data: [1.0, 0.0, 4.0]"')
-            e.reset()
-        if e.action == 'No Music':
-            os.system('rostopic pub -1 /robot_sound std_msgs/Int32MultiArray "data: [0.0, 0.0, 4.0]"')
+            
         if e.action == 'Exit':
             cv.destroyAllWindows()
             capture.release()
             break
         imgbox.value = cv.imencode('.jpg', img)[1].tobytes()
         sleep(0.25)
+    except KeyboardInterrupt:capture.release()
 
   - Execute the camera() function. Since we are working with multiple different variables and functions, wrap the process within a threat.
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        display(controls_box,output)
-        threading.Thread(target=camera, ).start()
+    display(controls_box,output)
+    threading.Thread(target=camera, ).start()
 
-  - Be sure to delete the robot , and reset the robot arm control after exiting the GUI. 
+- Be sure to delete the robot , and reset the robot arm control after exiting the GUI. 
 
-    .. code-block:: python 
+.. code-block:: python 
 
-        del Arm
+    del Arm
 
-        %%capture
-        !pm2 stop 15
-        !pm2 start 14
+    %%capture
+    !pm2 stop 15
+    !pm2 start 14
 
-Pick up an object and place it somewhere else!
+Pick up objects and place them automatically!
 -------------------------------------------------
 
 Now that we have built our program, using the GUI control and grab an object and place it somewhere else. 
 
-.. thumbnail:: /_images/ai_training/gui.png
+.. thumbnail:: /_images/ai_training/gui_pnp.png
     
  
 (**IMPORTANT**) 
-- The preset angles of the arm might not be fit for the environment you are in. Go to the ``mission_lib.py`` to change the angles or add more servo motor updates. 
-- It is highly recommended that you change and experiment around the mission_lib.py file and see how the movement of the arm is set up. 
+- The preset angles of the arm might not be fit for the environment you are in. Go to the ``mission_lib_pnp.py`` to change the angles or add more servo motor updates. 
+- It is highly recommended that you change and experiment around the ``mission_lib_pnp.py`` file and see how the movement of the arm is set up. 
