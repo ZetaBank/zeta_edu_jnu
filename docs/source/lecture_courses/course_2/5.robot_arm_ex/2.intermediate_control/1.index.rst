@@ -6,5 +6,5 @@ Here are the follow along contents:
 .. toctree:: 
 
     2.dancing_arm
-    3.teaching_arm
-    4.gripper_control
+    3.gripper_control
+    4.teaching_arm
