@@ -11,7 +11,7 @@ Discussion
         </p>
         <ul>
             <li> 
-                Discussion of collaboration between robot arm and human.
+                Cooperation between robots and humans in industrial settings.
                 <ul>
                     <li>An industry where robots and humans work together to reduce human risk and help.</li>
                     <li>Problems that can arise when robots collaborate with humans and ways to improve and overcome them.</li>
