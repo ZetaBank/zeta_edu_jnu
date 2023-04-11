@@ -11,9 +11,10 @@ The robot arm allows us to do variety of tasks with our robot. We have only trie
         </p>
         <ul>
             <li> 
-                The convergence of artificial intelligence and art.
+                Coexistence of humans and robots.
                 <ul>
-                    <li>What is the role and value of creative activities using robot arms and AI technology in the fields of art and aesthetics?</li>
+                    <li>A robot that you think you need in your daily life.</li>
+                    <li>The positive impact of robots on human emotions.</li>
                 </ul>
             </li>
             
