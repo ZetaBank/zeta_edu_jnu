@@ -11,7 +11,6 @@ Mission Project
             <div class="line"><strong>-</strong> This mission is a <strong>group project</strong></div>
             <div class="line"><strong>-</strong> Within your team, create a custom robot arm control system</div>
             <div class="line"><strong>-</strong> System should be able to: </div>
-            <div class="line">&emsp;<strong>1.</strong>  Generate Graphical User Interface (GUI) that displays the robot arm camera.  </div>
             <div class="line">&emsp;<strong>2.</strong> Controls that would allow the robot arm to move and pick up objects.   </div>
             <div class="line">&emsp;<strong>3.</strong> Ability to play and stop the music while operating above tasks.  </div>
             <div class="line"><strong>-</strong> It is recommended that the final code be on the Leaders computer. (Simultaneous commands to the robot must be avoided!)</div>
@@ -22,7 +21,11 @@ Mission Project
 Libraries used for this Mission
 ------------------------------------------
 
-Here are the libraries needed for our Mission
+Here are the libraries needed for our Mission.
+
+
+time and Arm_Lib Library
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - To control the robot arm we will import:
 
@@ -33,6 +36,10 @@ Here are the libraries needed for our Mission
 
         import time
         from Arm_Lib import Arm_Device
+
+
+os Library
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - To control the music we will import:
 
@@ -53,7 +60,7 @@ Open the mission folder and open the mission-dance.ipynb file.
 
 .. thumbnail:: /_images/ai_training/mission_dance.png
 
--   Reset the Robot Arm control and Sound
+- Reset the Robot Arm control and Sound.
 
 .. code-block:: python 
 
@@ -62,7 +69,7 @@ Open the mission folder and open the mission-dance.ipynb file.
     !pm2 start key_to_dofbot
     !pm2 start robot_sound
 
-- First, import in the necessary libraries
+- First, import in the necessary libraries.
 
 .. code-block:: python
 
@@ -73,7 +80,7 @@ Open the mission folder and open the mission-dance.ipynb file.
     Arm = Arm_Device()
     time.sleep(.1)
 
-- Initialize the Arm Device
+- Initialize the Arm Device.
 
 .. code-block:: python
 
@@ -103,14 +110,14 @@ Open the mission folder and open the mission-dance.ipynb file.
     !pm2 start joy_to_dofbot
     !pm2 stop robot_sound
 
-Make your robot dance to the music!
+Make Your Robot Dance to the Music!
 -------------------------------------------------
 
-Now let the robot dance to the music you want. Don't forget to give sleep between robot movements. 
+Now let the robot dance to the music you want. Don't forget to add sleep() code between robot movements.
 
 .. thumbnail:: /_images/ai_training/gui_dance.png
     
  
 (**IMPORTANT**) 
-- The preset angles of the arm might not be fit for the environment you are in. Go to the ``mission_lib.py`` to change the angles or add more servo motor updates. 
-- It is highly recommended that you change and experiment around the mission_lib.py file and see how the movement of the arm is set up. 
+- The servo's operating angle is 0-180 degrees, but in practice, collisions may occur due to the operating range between each joint. 
+- Code with crashes and injuries in mind.

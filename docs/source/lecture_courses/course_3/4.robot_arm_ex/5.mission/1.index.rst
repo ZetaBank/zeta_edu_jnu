@@ -11,7 +11,7 @@ Mission Project
             <div class="line"><strong>-</strong> This mission is a <strong>group project</strong></div>
             <div class="line"><strong>-</strong> Within your team, create a custom robot arm control system</div>
             <div class="line"><strong>-</strong> System should be able to: </div>
-            <div class="line">&emsp;<strong>1.</strong>  Generate Graphical User Interface (GUI) that displays the robot arm camera.  </div>
+            <div class="line">&emsp;<strong>1.</strong> Generate Graphical User Interface (GUI) that displays the robot arm camera.  </div>
             <div class="line">&emsp;<strong>2.</strong> Controls that would allow the robot arm to move and pick up objects.   </div>
             <div class="line">&emsp;<strong>3.</strong> Ability to play and stop the music while operating above tasks.  </div>
             <div class="line"><strong>-</strong> It is recommended that the final code be on the Leaders computer. (Simultaneous commands to the robot must be avoided!)</div>
@@ -22,7 +22,7 @@ Mission Project
 Libraries used for this Mission
 ------------------------------------------
 
-Here are the libraries needed for our Mission
+Here are the libraries needed for our Mission.
 
 - For GUI and robot camera display we will import:
 
@@ -67,14 +67,14 @@ mission_lib_figure custom Library
 |
 
 - The ``mission_lib_figure.py`` allows for functions that would control the robot arm movements.  
-  The python file itself contains Movement class with 6 initial variables
+  The python file itself contains Movement class with 6 initial variables.
 
-  - *Arm*: for storing the Arm_Device object (User Input when initializing the **Movement** object )
-  - *initial_position*: for storing angle information for the six servos initial position (default value: [90, 90, 0, 90, 90, 170])
-  - *angle_range*: for calculating angles to draw a circle (default value: range(0, 361, 10))
-  - *circle_positions*: for storing angles where the robot arm moves to draw a circle sequentially
-  - *square_positions*: for storing angles where the robot arm moves to draw a square sequentially
-  - *triangle_positions*: for storing angles where the robot arm moves to draw a triangle sequentially
+  - *Arm*: for storing the Arm_Device object (User Input when initializing the **Movement** object).
+  - *initial_position*: for storing angle information for the six servos initial position (default value: [90, 90, 0, 90, 90, 170]).
+  - *angle_range*: for calculating angles to draw a circle (default value: range(0, 361, 10)).
+  - *circle_positions*: for storing angles where the robot arm moves to draw a circle sequentially.
+  - *square_positions*: for storing angles where the robot arm moves to draw a square sequentially.
+  - *triangle_positions*: for storing angles where the robot arm moves to draw a triangle sequentially.
 
   .. code-block:: python 
 
@@ -261,7 +261,7 @@ Open the mission folder and open the mission-circle.ipynb file.
 
 .. thumbnail:: /_images/ai_training/mission_circle.png
 
--   Reset the Robot Arm control
+- Reset the Robot Arm control.
 
 .. code-block:: python 
 
@@ -269,7 +269,7 @@ Open the mission folder and open the mission-circle.ipynb file.
     !pm2 stop 15
     !pm2 start 14
 
-- First, import in the necessary libraries
+- First, import in the necessary libraries.
 
 .. code-block:: python
 
@@ -282,7 +282,7 @@ Open the mission folder and open the mission-circle.ipynb file.
     from event_name_figure import EventName
     from IPython.display import display
 
-- Import and initialize the Arm Device
+- Import and initialize the Arm Device.
 
 .. code-block:: python
 
@@ -299,7 +299,7 @@ Open the mission folder and open the mission-circle.ipynb file.
     e = EventName()
     movement = Movement(Arm)
 
-- Create the GUI widgets:
+- Create the GUI widgets.
 
 .. code-block:: python 
 
@@ -396,5 +396,5 @@ Now that we have built our program, using the GUI control and grab an object and
     
  
 (**IMPORTANT**) 
-- The preset angles of the arm might not be fit for the environment you are in. Go to the ``mission_lib.py`` to change the angles or add more servo motor updates. 
-- It is highly recommended that you change and experiment around the mission_lib.py file and see how the movement of the arm is set up. 
+- The preset angles of the arm might not be fit for the environment you are in. Go to the ``mission_lib_figure.py`` to change the angles or add more servo motor updates. 
+- It is highly recommended that you change and experiment around the ``mission_lib_figure.py`` file and see how the movement of the arm is set up. 
