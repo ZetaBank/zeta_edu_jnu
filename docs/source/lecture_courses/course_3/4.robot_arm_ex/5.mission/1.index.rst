@@ -387,7 +387,7 @@ Open the mission folder and open the mission-circle.ipynb file.
     !pm2 stop 15
     !pm2 start 14
 
-Let's draw a picture with a robot arm!!!
+Draw a picture with a robot arm!
 -------------------------------------------------
 
 Now that we have built our program, using the GUI control and grab an object and place it somewhere else. 
