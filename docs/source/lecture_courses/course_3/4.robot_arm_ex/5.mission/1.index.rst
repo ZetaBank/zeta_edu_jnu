@@ -393,6 +393,10 @@ Draw a picture with a robot arm!
 Now that we have built our program, using the GUI control and grab an object and place it somewhere else. 
 
 .. thumbnail:: /_images/ai_training/gui_circle.png
+
+
+
+.. thumbnail:: /_images/ai_training/gif_circle.gif
     
  
 (**IMPORTANT**) 

@@ -338,6 +338,10 @@ Pick up objects and place them automatically!
 Now that we have built our program, using the GUI control and grab an object and place it somewhere else. 
 
 .. thumbnail:: /_images/ai_training/gui_pnp.png
+
+
+
+.. thumbnail:: /_images/ai_training/gif_pnp.gif
     
  
 (**IMPORTANT**) 
