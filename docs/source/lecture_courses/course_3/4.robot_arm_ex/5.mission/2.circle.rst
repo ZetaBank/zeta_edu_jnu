@@ -188,7 +188,7 @@ mission_lib_figure custom Library
     The functions responsible for move the joints of the robot arm sequentially in the order of coordinates are (``move_to_circle_positions``, ``move_to_square_positions``, ``move_to_triangle_positions``).
     These functions receives lists calculated in the main function and sequentially moves the six servos of the robot arm.
 
-    - Pincher (Pinch):
+    Example:
 
       .. code-block:: python 
 
