@@ -776,7 +776,7 @@ The calculation parameters for these values are predetermined within our zetabot
 <li><p class="linemarker linemarker-30">255: Occupied area where robot can not move</p></li>
 </ul>
 <a class=""
-               data-lightbox="group-8de19aad-8017-4652-8965-d9e9c6f93706"
+               data-lightbox="group-79495cd6-60b1-4dba-aab2-db4c7c3c2080"
                href="../../../_images/cost1.png"
                title=""
                data-title=""
@@ -792,7 +792,7 @@ The calculation parameters for these values are predetermined within our zetabot
 <p class="linemarker linemarker-36">We may also visualize the costmap value with gray scale. The darker the pixels get, more likely there is an obstable.
 The green points represent obstacles found using the distance sensor.</p>
 <a class=""
-               data-lightbox="group-acece5bc-916b-4501-bd42-863c53c1cd11"
+               data-lightbox="group-0f2304ba-2520-4f3f-8407-fa9b66794fb9"
                href="../../../_images/cost_rep1.png"
                title=""
                data-title=""
@@ -818,7 +818,7 @@ calculates the probability of the location of the robot.</p>
 (X, Y, Angle) values as X_0, distance inforamtion obtained from the distance sensor up to time t as Z_0 and movement
 information obtained from the encoder up to time t as U_0.</p>
 <a class=""
-               data-lightbox="group-f06e6d14-3aa7-46c1-85f4-bd78eef09cc1"
+               data-lightbox="group-ed04fff2-a983-47d3-aced-a8a2a107dc5a"
                href="../../../_images/bel1.png"
                title=""
                data-title=""
@@ -839,7 +839,7 @@ information obtained from the encoder up to time t as U_0.</p>
 (which is a probability of x in relation to the hardware error), belief probability at the previous position and the
 movement information from the encoders.</p>
 <a class=""
-               data-lightbox="group-d78269fd-017c-4f19-b89b-dfd9ab7f26ef"
+               data-lightbox="group-99ef1ac9-5800-47ea-9500-b5df4f4e12b3"
                href="../../../_images/bel_pred1.png"
                title=""
                data-title=""
@@ -858,7 +858,7 @@ movement information from the encoders.</p>
 <p class="linemarker linemarker-81">For update step, we use the established sensor model probability which includes the hardware error, belief probability of
 the current position and normalization constant eta.</p>
 <a class=""
-               data-lightbox="group-f7aa18b7-d575-4bad-9f30-39274c62ae6e"
+               data-lightbox="group-41f75de0-34ee-48e2-9ec8-cb8cab5baaf1"
                href="../../../_images/bel_update1.png"
                title=""
                data-title=""
@@ -876,7 +876,7 @@ using the calculated probability bel(<em>x_i</em>) of the current position. With
 process with our samples instead of particles. For AMCL, we extract a new sample set using the robot movement model at the probability belief of the previous position.
 For these new sample set, the weight is calculated using the distance inforamtion, and normalization constant eta.</p>
 <a class=""
-               data-lightbox="group-78684cb3-78c1-4fdc-8dca-1c21ae60f673"
+               data-lightbox="group-4d8160ee-ebc5-4447-8289-964d29f984f3"
                href="../../../_images/bel_w1.png"
                title=""
                data-title=""
@@ -891,7 +891,7 @@ For these new sample set, the weight is calculated using the distance inforamtio
 </div>
 <p class="linemarker linemarker-97">And in our resampling step, we create N samples of new X sampling (particle) sets using the new sampled x set and weight calculated for the new sampled x set.</p>
 <a class=""
-               data-lightbox="group-a8e524d9-018a-4bd1-8ed6-27a8953bac72"
+               data-lightbox="group-85f12fde-55b3-4c47-aeb4-2a8fbc220d28"
                href="../../../_images/bel_final1.png"
                title=""
                data-title=""
@@ -907,7 +907,7 @@ For these new sample set, the weight is calculated using the distance inforamtio
 <p class="linemarker linemarker-103">When this process is repeated, while the robot is moving, the proabbility of the estimated robot position increases in accuracy.
 For example, on the image below, we can see the converging location from t1 time frame to t5 time frame. All this process is referred to as “Probabilistic Robotics”.</p>
 <a class=""
-               data-lightbox="group-e7bdf89f-fbe2-462c-945e-3fa2c0214795"
+               data-lightbox="group-ab5d699f-72b3-431f-a68e-98a8f4e7ab42"
                href="../../../_images/bel_final21.png"
                title=""
                data-title=""
@@ -925,7 +925,7 @@ For example, on the image below, we can see the converging location from t1 time
 obstacles that can possibly collide with the robot.</p>
 <p class="linemarker linemarker-115">In DWA the robot is not represented in X and Y coordinates but rather in the velocity search space with translation velocity v and the rotational velocity w as axes.</p>
 <a class=""
-               data-lightbox="group-d430f147-564f-4733-8986-8b7a7853f4a1"
+               data-lightbox="group-6b6f0df9-e5e8-4e48-ad92-507e35347969"
                href="../../../_images/dwa11.png"
                title=""
                data-title=""
@@ -958,7 +958,7 @@ obstacles that can possibly collide with the robot.</p>
 that maximizes the objective function which considers the direction, velocity and collision of the robot. With plotting, we can find optimal
 velocity among various <em>v</em> and <em>w</em> options to destination.</p>
 <a class=""
-               data-lightbox="group-01669239-4b46-4288-b42f-693f9add01d0"
+               data-lightbox="group-b56fe1d2-3cfe-4fed-9d16-816b64fd9aab"
                href="../../../_images/dwa21.png"
                title=""
                data-title=""
