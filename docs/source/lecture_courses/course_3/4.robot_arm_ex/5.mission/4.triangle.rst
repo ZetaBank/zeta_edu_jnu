@@ -255,11 +255,11 @@ Lets Start the Mission!!!
 ----------------------------
 
 
-Open the mission folder and open the mission-circle.ipynb file.
+Open the mission folder and open the mission-triangle.ipynb file.
 
-- mission-circle.ipynb
+- mission-triangle.ipynb
 
-.. thumbnail:: /_images/ai_training/mission_circle.png
+.. thumbnail:: /_images/ai_training/mission_triangle.png
 
 - Reset the Robot Arm control.
 
@@ -308,7 +308,7 @@ Open the mission folder and open the mission-circle.ipynb file.
     output = widgets.Output()
 
     # Widgets
-    num_input = widgets.IntSlider(min=1, max=90, step=1, value=45, layout=button_layout) # Get the radius of the circle.
+    num_input = widgets.IntSlider(min=1, max=90, step=1, value=45, layout=button_layout) # Get the length of the base of the equilateral triangle.
 
     start_button = widgets.Button(description='Start', button_style='success', layout=button_layout)
 
@@ -357,7 +357,7 @@ Open the mission folder and open the mission-circle.ipynb file.
     img = cv.resize(img, (640, 480))
 
     if e.action == 'Start':
-        movement.move_to_circle_positions(num_input.value, 1000)
+        movement.move_to_triangle_positions(num_input.value, 1000)
         
     if e.action == 'Reset':
         movement.move_to_initial_position(1000)
