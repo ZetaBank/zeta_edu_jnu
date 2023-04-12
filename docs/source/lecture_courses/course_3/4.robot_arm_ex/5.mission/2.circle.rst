@@ -1,4 +1,4 @@
-Mission Project
+Draw a Circle with the Robot Arm
 ==================
 
 .. raw:: html
