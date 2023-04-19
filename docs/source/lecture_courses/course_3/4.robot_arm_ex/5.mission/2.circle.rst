@@ -396,7 +396,7 @@ Now that we have built our program, using the GUI control and grab an object and
 
 
 
-.. thumbnail:: /_images/ai_training/gif_circle.gif
+.. thumbnail:: /_images/ai_training/gif_circle_resize.gif
     
  
 (**IMPORTANT**) 
