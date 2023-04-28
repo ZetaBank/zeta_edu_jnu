@@ -115,7 +115,8 @@ Make Your Robot Dance to the Music!
 
 Now let the robot dance to the music you want. Don't forget to add sleep() code between robot movements.
 
-.. thumbnail:: /_images/ai_training/gui_dance.png
+.. thumbnail:: /_images/ai_training/gui_dance1.png
+.. thumbnail:: /_images/ai_training/gui_dance2.png
     
  
 (**IMPORTANT**) 
