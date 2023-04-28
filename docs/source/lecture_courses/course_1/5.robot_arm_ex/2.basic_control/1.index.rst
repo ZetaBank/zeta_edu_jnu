@@ -5,6 +5,7 @@ Here are the follow along contents:
 
 .. toctree:: 
 
-    2.moving_arm
-    3.motor_angle
-    4.motor_cont
+    2.before_starting
+    3.moving_arm
+    4.motor_angle
+    5.motor_cont
