@@ -10,12 +10,12 @@ Read Servo Motor Angle
         </p>
         <div class="line-block">
             <div class="line">The program launching process along with parameter settings are all simplified and set up on the Jupyter Notebook Environment.</div>
-            <div class="line">This example allows us to check the current angle of each of the servo motors</div>
+            <div class="line">This example allows us to check the current angle of each of the servo motors.</div>
         </div>
         <ul>
-            <li>Open the 05_02_read_servo.ipynb Jupyter Notebook</li>
-            <li>Load Arm_Lib module and register the robot arm as an object</li>
-            <li>Follow and Execute the example codes</li>
+            <li>Open the 05_02_read_servo.ipynb Jupyter Notebook.</li>
+            <li>Load Arm_Lib module and register the robot arm as an object.</li>
+            <li>Follow and Execute the example codes.</li>
 
         </ul>
         <div class="line">(The Jetson Board used for these examples are => Jetson Nano)</div>
@@ -30,40 +30,28 @@ Read Servo Motor Angle
 -   05_02_read_servo.ipynb
 -   | Running the cell code
     | `Ctrl + Enter`
+-   To control the robot arm from code, don't forget to shut down the docker container. See `here <https://zeta-edu-lecture.readthedocs.io/en/latest/lecture_courses/course_1/5.robot_arm_ex/2.basic_control/2.before_starting.html>`_.
 
 .. thumbnail:: /_images/having_fun/rob_arm1.png
 
-|
-
--   To make sure that no other program is using the robot arm, turn off the joy stick control and allow for robot arm to be controlled:
-
-.. code-block:: python 
-
-    %%capture
-    !pm2 stop 14
-    !pm2 start 15
-
-
--   Load Arm_Lib module and register the robot arm as an object
+-   Load Arm_Lib module and register the robot arm as an object.
 
 .. code-block:: python
 
-    #!/usr/bin/env python3
-    #coding=utf-8
     import time
     from Arm_Lib import Arm_Device
 
-    # Register robot arm as an object
+    # 로봇팔 객체 등록
     Arm = Arm_Device()
     time.sleep(.1)
 
 
 -   Arm_serial_servo_read (motor number)
--   Read all servo motor angles using while statement
+-   Read all servo motor angles using while statement.
 
 .. code-block:: python
 
-    # Read the angles of all servos.
+    # 모든 서보의 각도를 읽는다.
     def main():
 
         while True:
@@ -83,11 +71,11 @@ Read Servo Motor Angle
 
 
 -   Arm_serial_servo_write (motor number, angle, time)
--   Read angle after controlling servo motor No. 3
+-   Read angle after controlling servo motor No. 3.
 
 .. code-block:: python
 
-    # After individually controlling the movement of the servos, the angle is read.
+    # 서보의 움직임을 개별적으로 제어한 후, 각도를 읽는다.
     id = 3
     angle = 41
 
@@ -100,16 +88,9 @@ Read Servo Motor Angle
     time.sleep(.5)
 
 
--   Remove the robot arm object 
+-   Remove the robot arm object.
 
 .. code-block:: python
 
-    del Arm  # Remove robot arm object
+    del Arm  # 로봇팔 객체를 제거
 
--   Reset the Robot Arm control
-
-.. code-block:: python 
-
-    %%capture
-    !pm2 stop 15
-    !pm2 start 14

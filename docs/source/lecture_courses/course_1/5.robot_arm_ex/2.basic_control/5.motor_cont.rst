@@ -6,16 +6,16 @@ Controlling Servo Motors
     
     <div style="background: #C3F8FF" class="admonition note custom">
         <p style="background: light-blue" class="admonition-title">
-            Follow along: Multiple Servo Control Example
+            Follow along: Controlling Servo Motors
         </p>
         <div class="line-block">
             <div class="line">The program launching process along with parameter settings are all simplified and set up on the Jupyter Notebook Environment.</div>
             <div class="line">This example shows us how to control multiple different servos at the same time.</div>
         </div>
         <ul>
-            <li>Open the 05_03_ctrl_all.ipynb Jupyter Notebook</li>
-            <li>Load Arm_Lib module and register the robot arm as an object</li>
-            <li>Follow and Execute the example codes</li>
+            <li>Open the 05_03_ctrl_all.ipynb Jupyter Notebook.</li>
+            <li>Load Arm_Lib module and register the robot arm as an object.</li>
+            <li>Follow and Execute the example codes.</li>
 
         </ul>
         <div class="line">(The Jetson Board used for these examples are => Jetson Nano)</div>
@@ -28,47 +28,33 @@ Controlling Servo Motors
     <hr>
 
 -   05_03_ctrl_all.ipynb
--   | Running the cell code
+-   | Running the cell code.
     | `Ctrl + Enter`
+-   To control the robot arm from code, don't forget to shut down the docker container. See `here <https://zeta-edu-lecture.readthedocs.io/en/latest/lecture_courses/course_1/5.robot_arm_ex/2.basic_control/2.before_starting.html>`_.
 
 .. thumbnail:: /_images/having_fun/motor_cont1.png
 
-
-|
-
--   To make sure that no other program is using the robot arm, turn off the joy stick control and allow for robot arm to be controlled:
-
-.. code-block:: python 
-
-    %%capture
-    !pm2 stop 14
-    !pm2 start 15
-
--   Load Arm_Lib module and register the robot arm as an object
-
+-   Load Arm_Lib module and register the robot arm as an object.
 
 .. code-block:: python
 
-    #!/usr/bin/env python3
-    #coding=utf-8
     import time
     from Arm_Lib import Arm_Device
 
-    # register the robot arm as an object
+    # 로봇팔 객체 등록
     Arm = Arm_Device()
     time.sleep(.1)
 
 
 -   Arm_serial_servo_write (motor number, angle, time)
--   Increase and decrease all servo motor angles by 1˚ using a while statement
-
+-   Increase and decrease all servo motor angles by 1˚ using a while statement.
 
 .. code-block:: python
 
-    # It gradually changes the angle while controlling 6 servos at the same time.
+    # 6개의 서보를 동시에 제어하면서, 각도를 점점 변화 시킨다.
     def ctrl_all_servo(angle, s_time = 500):
         Arm.Arm_serial_servo_write6(angle, 180-angle, angle, angle, angle, angle, s_time)
-        time.sleep(s_time/1000)
+        time.sleep(0.1)
 
 
     def main():
@@ -89,7 +75,7 @@ Controlling Servo Motors
                 if angle <= 0:
                     dir_state = 1
             
-            ctrl_all_servo(angle, 10)
+            ctrl_all_servo(angle, 700)
             time.sleep(10/1000)
     #         print(angle)
 
@@ -101,17 +87,8 @@ Controlling Servo Motors
         pass
 
 
-
--   Remove the robot arm object 
+-   Remove the robot arm object.
 
 .. code-block:: python
 
-    del Arm  # Remove robot arm object
-
--   Reset the Robot Arm control
-
-.. code-block:: python 
-
-    %%capture
-    !pm2 stop 15
-    !pm2 start 14
+    del Arm  # 로봇팔 객체를 제거
