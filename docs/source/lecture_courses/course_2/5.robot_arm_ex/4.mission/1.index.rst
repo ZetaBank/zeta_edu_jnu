@@ -5,15 +5,14 @@ Mission Project
 
     <div style="background: #ffe5b4" class="admonition note custom">
         <p style="background: #ffbf00" class="admonition-title">
-            Project Name: Robot Arm Control System
+            Project Name: Robot Arm Pick and Place System
         </p>
         <div class="line-block">
-            <div class="line"><strong>-</strong> This mission is a <strong>group project</strong></div>
-            <div class="line"><strong>-</strong> Within your team, create a custom robot arm control system</div>
-            <div class="line"><strong>-</strong> System should be able to: </div>
-            <div class="line">&emsp;<strong>1.</strong> Generate Graphical User Interface (GUI) that displays the robot arm camera.  </div>
-            <div class="line">&emsp;<strong>2.</strong> Controls that would allow the robot arm to move and pick up objects.   </div>
-            <div class="line">&emsp;<strong>3.</strong> Ability to play and stop the music while operating above tasks.  </div>
+            <div class="line"><strong>-</strong> This mission is a <strong>group project.</strong></div>
+            <div class="line"><strong>-</strong> Within your team, create a custom robot arm control system.</div>
+            <div class="line"><strong>-</strong> System should be able to:</div>
+            <div class="line">&emsp;<strong>1.</strong> Generate Graphical User Interface (GUI) that displays the robot arm camera.</div>
+            <div class="line">&emsp;<strong>2.</strong> Controls that would allow the robot arm to move and pick up objects.</div>
             <div class="line"><strong>-</strong> It is recommended that the final code be on the Leaders computer. (Simultaneous commands to the robot must be avoided!)</div>
         </div>
     </div>
@@ -47,14 +46,6 @@ Here are the libraries needed for our Mission.
 
         from mission_lib_pnp import Movement
         import Arm_Lib
-
-- For Music controls we will import:
-
-    - pygame library for the sound drives it provides.
-
-    .. code-block:: python 
-
-        from pygame import mixer
 
 
 mission_lib_pnp custom Library
@@ -206,13 +197,9 @@ Open the mission folder and open the mission-pnp.ipynb file.
 
 .. thumbnail:: /_images/ai_training/mission_pnp.png
 
--   Reset the Robot Arm control.
+|
 
-.. code-block:: python 
-
-    %%capture
-    !pm2 stop 15
-    !pm2 start 14
+- To control the robot arm from code, don't forget to shut down the docker container. See `here <https://zeta-edu-lecture.readthedocs.io/en/latest/lecture_courses/course_1/5.robot_arm_ex/2.basic_control/2.before_starting.html>`_.
 
 - First, import in the necessary libraries.
 
@@ -220,8 +207,8 @@ Open the mission folder and open the mission-pnp.ipynb file.
 
     import cv2 as cv
     import threading
+    import os
     from time import sleep
-    import math
     import ipywidgets as widgets
     from mission_lib_pnp import Movement
     from event_name_pnp import EventName
@@ -285,12 +272,12 @@ Open the mission folder and open the mission-pnp.ipynb file.
         # Open camera
         capture = cv.VideoCapture(1)
 
-- To process the incoming frames from the capture variable, create a loop that will run as long as camera feed is open. 
+- To process the incoming frames from the capture variable, create a loop. 
 
 .. code-block:: python 
 
     # Be executed in loop when the camera is opened normally 
-    while capture.isOpened():
+    while True:
     
 - Within the loop grab the camera frame and resize it to (640, 480) using the *cv.resize* function. With the help of **if** function, listen to the action variable, and assign an appropriate function when the action variable is changed. 
 
@@ -322,15 +309,12 @@ Open the mission folder and open the mission-pnp.ipynb file.
     display(controls_box,output)
     threading.Thread(target=camera, ).start()
 
-- Be sure to delete the robot , and reset the robot arm control after exiting the GUI. 
+- Be sure to delete the robot after exiting the GUI. 
 
 .. code-block:: python 
 
     del Arm
 
-    %%capture
-    !pm2 stop 15
-    !pm2 start 14
 
 Pick up objects and place them automatically!
 -------------------------------------------------

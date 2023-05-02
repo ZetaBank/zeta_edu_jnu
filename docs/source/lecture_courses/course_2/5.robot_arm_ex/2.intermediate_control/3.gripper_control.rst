@@ -73,7 +73,7 @@ Gripper Control
 
 .. code-block:: python
 
-    Arm_serial_servo_write6_array(list, 시간)
+    Arm_serial_servo_write6_array(list, time)
 
 .. code-block:: python
 

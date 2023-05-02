@@ -6,16 +6,16 @@ Robot Arm teaching
     
     <div style="background: #C3F8FF" class="admonition note custom">
         <p style="background: light-blue" class="admonition-title">
-            Follow along: Robot Arm Movement Retention Example
+            Follow along: Robot Arm teaching
         </p>
         <div class="line-block">
             <div class="line">The program launching process along with parameter settings are all simplified and set up on the Jupyter Notebook Environment.</div>
             <div class="line">The robot arm is able to retain an change in the robot arm position as a movement. This example shows how the movement teaching process is conducted.</div>
         </div>
         <ul>
-            <li>Open the 05_05_study_mode.ipynb Jupyter Notebook</li>
-            <li>Load Arm_Lib module and register the robot arm as an object</li>
-            <li>Follow and Execute the example codes</li>
+            <li>Open the 05_05_study_mode.ipynb Jupyter Notebook.</li>
+            <li>Load Arm_Lib module and register the robot arm as an object.</li>
+            <li>Follow and Execute the example codes.</li>
 
         </ul>
         <div class="line">(The Jetson Board used for these examples are => Jetson Nano)</div>
@@ -30,33 +30,21 @@ Robot Arm teaching
 -   05_05_study_mode.ipynb
 -   | Running the cell code
     | `Ctrl + Enter`
+-   To control the robot arm from code, don't forget to shut down the docker container. See `here <https://zeta-edu-lecture.readthedocs.io/en/latest/lecture_courses/course_1/5.robot_arm_ex/2.basic_control/2.before_starting.html>`_.
 
 .. thumbnail:: /_images/having_fun/teaching1.png
 
-|
-
--   To make sure that no other program is using the robot arm, turn off the joy stick control and allow for robot arm to be controlled:
-
-.. code-block:: python 
-
-    %%capture
-    !pm2 stop 14
-    !pm2 start 15
-
--   Load Arm_Lib module and register the robot arm as an object
+-   Load Arm_Lib module and register the robot arm as an object.
 
 .. code-block:: python
 
-    #!/usr/bin/env python3
-    #coding=utf-8
     import time
     from Arm_Lib import Arm_Device
 
     Arm = Arm_Device()
     time.sleep(.1)
 
-
--   Robot arm teaching and learned motion execution
+-   Robot arm teaching and learned motion execution.
 
 
 .. code-block:: python
@@ -109,18 +97,9 @@ Robot Arm teaching
     Arm.Arm_Clear_Action()
 
 
--   Remove the robot arm object 
-
+-   Remove the robot arm object.
 
 .. code-block:: python
 
-    del Arm  # Release DOFBOT object
+    del Arm  # Remove robot arm object.
 
-
--   Reset the Robot Arm control
-
-.. code-block:: python 
-
-    %%capture
-    !pm2 stop 15
-    !pm2 start 14
