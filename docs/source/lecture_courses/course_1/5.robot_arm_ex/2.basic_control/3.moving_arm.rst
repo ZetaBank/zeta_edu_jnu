@@ -29,11 +29,13 @@ Moving the Robot Arm
 -   05_01_left_right.ipynb
 -   | Running the cell code
     | `Ctrl + Enter`
+-   | To control the robot arm from code, don't forget to shut down the docker container. See how below.
+    | `https://zeta-edu-lecture.readthedocs.io/en/latest/lecture_courses/course_1/5.robot_arm_ex/2.basic_control/2.before_starting.html`
 
 .. thumbnail:: /_images/having_fun/arm1.png
 
 
--   To make sure that no other program is using the robot arm, turn off the joy stick control and allow for robot arm to be controlled:
+-   To control the robot arm from code, don't forget to shut down the docker container. See how below.
 
 .. code-block:: python 
 
