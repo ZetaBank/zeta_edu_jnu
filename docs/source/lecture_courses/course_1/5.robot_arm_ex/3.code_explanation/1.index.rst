@@ -4,23 +4,20 @@ Code Explanation
 Overall Explanation
 --------------------
 
--   With our follow along examples, we were able to move our robot arm with precision as well as produce music with our 
-integrated speaker within the zetabot. The instructional codes have been compile into a jupyter notebook for the 
-ease of use. 
-
+-   With our follow along examples, we were able to move our robot arm with precision as well as produce music with our integrated speaker within the zetabot. 
+-   The instructional codes have been compile into a jupyter notebook for the ease of use. 
 
 Robot arm Movements
 --------------------
 
--   The instructions given to the robot arm are within Python 2 environment. We use ``Arm_Lib`` library
-which contains all the necessary modules that we use to operate our robot arm. 
-``Arm_Lib`` is a library provided by the Yahboom Robotics where our robot arm was made.
+-   The instructions given to the robot arm are within Python 2 environment. We use ``Arm_Lib`` library which contains all the necessary modules that we use to operate our robot arm. 
+-   ``Arm_Lib`` is a library provided by the Yahboom Robotics where our robot arm was made.
 
 -   In order to instruct the robot arm, we must first initialize it as an object.
 
     .. code-block:: python
 
-        # Register robot arm as an object
+        # Register robot arm as an object.
         Arm = Arm_Device()
         time.sleep(.1)
     
@@ -51,7 +48,7 @@ Basic Movements
 
     .. code-block:: python
 
-        # Move all the servo's 90 degrees for 2 second
+        # Move all the servo's 90 degrees for 2 second.
         Arm.Arm_serial_servo_write6(90, 90, 90, 90, 90, 90, 1000)
 
     You may give the same instructions in a list format using ``Arm_seria_servo_write6_array(array, time)`` function. 
