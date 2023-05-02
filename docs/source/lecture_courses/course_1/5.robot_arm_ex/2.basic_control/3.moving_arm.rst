@@ -64,7 +64,13 @@ Moving the Robot Arm
             Arm.Arm_serial_servo_write(4, 180, 1000)
             time.sleep(1)
             
-            # Move the 1st and 5th servos left and right.
+            # Move the 1st and 5th servos left and right.-   Reset the Robot Arm control
+
+.. code-block:: python 
+
+    %%capture
+    !pm2 stop 15
+    !pm2 start 14
             Arm.Arm_serial_servo_write(1, 180, 500)
             time.sleep(.001)
             Arm.Arm_serial_servo_write(5, 180, 500)
