@@ -6,7 +6,7 @@ Before Starting
     
     <div style="background: #C3F8FF" class="admonition note custom">
         <p style="background: light-blue" class="admonition-title">
-            Follow along: Basic Robot Arm Control
+            Follow along: Before Starting
         </p>
         <div class="line-block">
             <div class="line">Here are the things to keep in mind before starting the robot arm training.</div>

@@ -41,7 +41,7 @@ Controlling Servo Motors
     import time
     from Arm_Lib import Arm_Device
 
-    # 로봇팔 객체 등록
+    # Register robot arm object.
     Arm = Arm_Device()
     time.sleep(.1)
 
@@ -51,7 +51,7 @@ Controlling Servo Motors
 
 .. code-block:: python
 
-    # 6개의 서보를 동시에 제어하면서, 각도를 점점 변화 시킨다.
+    # Gradually changes the angle while controlling 6 servos at the same time.
     def ctrl_all_servo(angle, s_time = 500):
         Arm.Arm_serial_servo_write6(angle, 180-angle, angle, angle, angle, angle, s_time)
         time.sleep(0.1)
@@ -91,4 +91,4 @@ Controlling Servo Motors
 
 .. code-block:: python
 
-    del Arm  # 로봇팔 객체를 제거
+    del Arm  # Remove robot arm object.

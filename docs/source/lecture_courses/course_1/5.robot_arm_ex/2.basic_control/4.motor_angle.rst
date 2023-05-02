@@ -41,7 +41,7 @@ Read Servo Motor Angle
     import time
     from Arm_Lib import Arm_Device
 
-    # 로봇팔 객체 등록
+    # Register robot arm object.
     Arm = Arm_Device()
     time.sleep(.1)
 
@@ -51,7 +51,7 @@ Read Servo Motor Angle
 
 .. code-block:: python
 
-    # 모든 서보의 각도를 읽는다.
+    # Read the angles of all servos.
     def main():
 
         while True:
@@ -75,7 +75,7 @@ Read Servo Motor Angle
 
 .. code-block:: python
 
-    # 서보의 움직임을 개별적으로 제어한 후, 각도를 읽는다.
+    # After individually controlling the movement of the servos, the angle is read.
     id = 3
     angle = 41
 
@@ -92,5 +92,5 @@ Read Servo Motor Angle
 
 .. code-block:: python
 
-    del Arm  # 로봇팔 객체를 제거
+    del Arm  # Remove robot arm object.
 
