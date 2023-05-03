@@ -1,32 +1,42 @@
 Code Explanation
 ==================
 
-Tacking a Color or a Face
-----------------------------------------
+Overall Explanation
+^^^^^^^^^^^^^^^^^
+
+-   Within our *follow along* examples, we follow a tracking examples, where our robot arm would track either track a color or track our face.
+
+-   In order to achieve this we implore three important steps.
+
+    1.   Input processing
+    2.   Processing and instructing the arm to move towards the detected a color or a face.
+    3.   Displaying the results. 
+
+-   The detection as well as imput/ output image processing was handled by ``cv2`` library from OpenCV.
+
+-   The movement of the robot arm was handled by the custom made proportianal integral derivative controller as well as the ``Arm_Lib`` library. 
 
 -   For tracking tasks, we provide custom library (for color tracking ``color_folow.py`` and ``PID.py``, for face tracking ``dofbot_conf.py``, ``face_follow.py``, ``PID.py``)
-
 
 Tracking a Color
 ^^^^^^^^^^^^^^^^^
 
 -   Here are all the libraries used for tracking a color task. 
 
-    -   *cv2*: Computer Vision library
+    -   *cv2*: Computer Vision library.
     -   *threading*: Threading library for multi, singular processing.
     -   *random*: Library for generating and controlling random instances.
     -   *time*: Library for time related modules. 
     -   *ipywidgets*: Widget library used to create graphical user interfaces with IPython display.
-    -   *IPython.display*: Library with modules that allow for graphical output within jupyter environment
+    -   *IPython.display*: Library with modules that allow for graphical output within jupyter environment.
     -   *color_follow*: Custom library with modules that allow for robot arm to follow the color. 
 
 -   Initialization
  
-
     1.   Create the follow instance for the color_follow modules.
     2.   Initialize model variable with 'General'. Later on it will be changed to whether you wish to learn a new color, learn to track or simply to exit the tracking process.
     3.   Initialize HSV_learning. Later on it will house the learned movement modules. 
-    4.   color_hsv: Initialize what red, green, blue, and yellow collow would be (in a spectrum)
+    4.   color_hsv: Initialize what red, green, blue, and yellow collow would be (in a spectrum).
     5.   color: Initialize the first color to be random. 
 
     .. code-block:: python 
@@ -132,11 +142,11 @@ similar to the *Tracking a Color* task.
 
 -   Here are all the libraries used for tracking a color task. 
 
-    -   *cv2*: Computer Vision library
+    -   *cv2*: Computer Vision library.
     -   *threading*: Threading library for multi, singular processing.
     -   *time*: Library for time related modules. 
     -   *ipywidgets*: Widget library used to create graphical user interfaces with IPython display.
-    -   *IPython.display*: Library with modules that allow for graphical output within jupyter environment
+    -   *IPython.display*: Library with modules that allow for graphical output within jupyter environment.
     -   *face_follow*: Custom library with modules that allow for robot arm to follow the face. 
 
 -   First initialize the robot arm position as well as creating the instances for the face follow model and the mode for the model.
@@ -152,7 +162,7 @@ similar to the *Tracking a Color* task.
 
         model = 'General'
 
--   Create the controls for the graphical user interface. Unlike the *Follow a Color* task, we do not need 
+-   Create the controls for the graphical user interface. Unlike the *Follow a Color* task, we do not need. 
     many user interfaces, since there is no need to change color or learning a new color. 
 
     .. code-block:: python 
