@@ -7,7 +7,7 @@ Teaching the Robot Arm
 -   Since manually instructing angle information for each of the servo for every movement is difficult, you may 
     teach you robot arm moves. 
     
-    -   By default, the servos are in locked position. The function that is responsible for locking and unlocking the robot arm is ``Arm_Button_Mode(mode)`` function
+    -   By default, the servos are in locked position. The function that is responsible for locking and unlocking the robot arm is ``Arm_Button_Mode(mode)`` function.
 
         The function recieves 1 input *mode* from the user. The mode must be an binary integer of either 1 and 0.
         

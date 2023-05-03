@@ -87,7 +87,11 @@ Controlling Servo Motors
         pass
 
 
--   Remove the robot arm object.
+-   Move the robot arm to initial position and remove the robot arm object.
+
+.. code-block:: python
+
+    Arm.Arm_serial_servo_write6(90, 90, 90, 90, 90, 90, 500)
 
 .. code-block:: python
 
