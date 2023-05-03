@@ -1,4 +1,4 @@
-Make Your Robot Dance to the Music!
+Mission Project
 ==================
 
 .. raw:: html
@@ -8,7 +8,7 @@ Make Your Robot Dance to the Music!
             Project Name: Make Your Robot Dance to the Music!
         </p>
         <div class="line-block">
-            <div class="line"><strong>-</strong> This mission is a <strong>group project,</strong></div>
+            <div class="line"><strong>-</strong> This mission is a <strong>group project.</strong></div>
             <div class="line"><strong>-</strong> Within your team, create a custom robot arm control system.</div>
             <div class="line"><strong>-</strong> System should be able to: </div>
             <div class="line">&emsp;<strong>2.</strong> Controls that would allow the robot arm to move and pick up objects.</div>
@@ -87,11 +87,7 @@ Open the mission folder and open the mission-dance.ipynb file.
 
     !ls /root/scripts/sensor/arm_sounds
 
-- Check out what music you can choose from.
-
-
 - Select the music you want by changing the data of the play_specific topic.
-
 
 .. code-block:: python 
 
@@ -103,13 +99,11 @@ Open the mission folder and open the mission-dance.ipynb file.
 
     os.system('rostopic pub -1 /play_specific std_msgs/String "data: \'stop\'"')
 
-
 - Be sure to delete the robot after running the code. 
 
 .. code-block:: python 
 
     del Arm
-
 
 Make Your Robot Dance to the Music!
 -------------------------------------------------

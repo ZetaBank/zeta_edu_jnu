@@ -73,6 +73,7 @@ mission_lib custom Library
   - *first_angle*: for storing angle information for the first servo (default value: 90)
   - *third_angle*: for storing angle information for the third servo (default value: 45)
   - *pincher_angle*: for storing angle information for the pincher (sixth) servo (default value: 90) 
+Mission Project
 
   .. code-block:: python 
 
