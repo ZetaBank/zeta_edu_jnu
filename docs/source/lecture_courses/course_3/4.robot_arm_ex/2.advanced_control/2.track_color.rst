@@ -12,12 +12,12 @@ Tracking a Color with the Robotic Arm
             <div class="line">The program launching process along with parameter settings are all simplified and set up on the Jupyter Notebook Environment.</div>
         </div>
         <ul>
-            <li>Open the 05_06_color_follow.ipynb Jupyter Notebook</li>
-            <li>Load Arm_Lib module and register the robot arm as an object</li>
-            <li>Create the instance and initialize the parameters</li>
-            <li>Creating controls</li>
-            <li>Switch mode</li>
-            <li>Execute the Code</li>
+            <li>Open the 05_06_follow_color.ipynb Jupyter Notebook.</li>
+            <li>Load Arm_Lib module and register the robot arm as an object.</li>
+            <li>Create the instance and initialize the parameters.</li>
+            <li>Creating controls.</li>
+            <li>Switch mode.</li>
+            <li>Execute the Code.</li>
 
         </ul>
         <div class="line">(The Jetson Board used for these examples are => Jetson Nano)</div>
@@ -30,22 +30,17 @@ Tracking a Color with the Robotic Arm
     <hr>
 
 
--   05_06_color_follow
--   | Running the cell code
+-   05_06_follow_color
+-   | Running the cell code.
     | `Ctrl + Enter`
 
 .. thumbnail:: /_images/having_fun/track1.png
 
--   To make sure that no other program is using the robot arm, turn off the joy stick control and allow for robot arm to be controlled:
+-   To control the robot arm from code, don't forget to shut down the docker container. See `here <https://zeta-edu-lecture.readthedocs.io/en/latest/lecture_courses/course_1/5.robot_arm_ex/2.basic_control/2.before_starting.html>`_.
 
-.. code-block:: python 
+-   Recognition and tracking of blue, green, yellow and red objects using robot arm camera.
 
-    %%capture
-    !pm2 stop 14
-    !pm2 start 15
-
--   Recognition and tracking of blue, green, yellow and red objects using robotic arm camera
--   Import head file
+-   Import head file.
 
 .. code-block:: python
 
@@ -57,8 +52,7 @@ Tracking a Color with the Robotic Arm
     from IPython.display import display
     from color_follow import color_follow
 
--   Initialize DOFBOT position
-
+-   Initialize DOFBOT position.
 
 .. code-block:: python
 
@@ -67,7 +61,7 @@ Tracking a Color with the Robotic Arm
     joints_0 = [90, 135, 20, 25, 90, 30]
     Arm.Arm_serial_servo_write6_array(joints_0, 1000)
 
--   Create the instance and initialize the parameters
+-   Create the instance and initialize the parameters.
 
 .. code-block:: python
 
@@ -81,7 +75,7 @@ Tracking a Color with the Robotic Arm
 
     color = [[random.randint(0, 255) for _ in range(3)] for _ in range(255)]
 
--   Creating controls
+-   Creating controls.
 
 .. code-block:: python
 
@@ -112,8 +106,7 @@ Tracking a Color with the Robotic Arm
     controls_box = widgets.HBox([img_box, Slider_box], layout=widgets.Layout(align_self='auto'))
     # ['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch', 'inherit', 'initial', 'unset']
 
-
--   Switch mode
+-   Switch mode.
 
 .. code-block:: python
 
@@ -138,6 +131,8 @@ Tracking a Color with the Robotic Arm
     follow_cancel.on_click(follow_cancel_Callback)
     exit_button.on_click(exit_button_Callback)
 
+-   Main process.
+
 .. code-block:: python
     
     def camera():
@@ -148,7 +143,7 @@ Tracking a Color with the Robotic Arm
         capture.set(4, 480)
         capture.set(5, 30)  #set frame
         # Be executed in loop when the camera is opened normally 
-        while capture.isOpened():
+        while True:
             try:
 
                 _, img = capture.read()
@@ -176,18 +171,11 @@ Tracking a Color with the Robotic Arm
                 sleep(0.25)
             except KeyboardInterrupt:capture.release()
 
--   Start
-
+-   Start.
 
 .. code-block:: python
 
     display(controls_box,output)
     threading.Thread(target=camera, ).start()
 
--   Reset the Robot Arm control
-
-.. code-block:: python 
-
-    %%capture
-    !pm2 stop 15
-    !pm2 start 14
+.. thumbnail:: /_images/ai_training/gui_color.png

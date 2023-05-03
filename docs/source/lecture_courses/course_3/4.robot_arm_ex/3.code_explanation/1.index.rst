@@ -16,7 +16,7 @@ Overall Explanation
 
 -   The movement of the robot arm was handled by the custom made proportianal integral derivative controller as well as the ``Arm_Lib`` library. 
 
--   For tracking tasks, we provide custom library (for color tracking ``color_folow.py`` and ``PID.py``, for face tracking ``dofbot_conf.py``, ``face_follow.py``, ``PID.py``)
+-   For tracking tasks, we provide custom library (for color tracking ``color_folow.py`` and ``PID.py``, for face tracking ``dofbot_conf.py``, ``face_follow.py``, ``PID.py``).
 
 Tracking a Color
 ^^^^^^^^^^^^^^^^^
@@ -73,11 +73,11 @@ Tracking a Color
             capture.set(4, 480)
             capture.set(5, 30)  #set frame
 
-    2. Capture every frame from the camera on loop. Terminate the loop upon closure of the camera.
+    2. Capture every frame from the camera on loop.
 
         .. code-block:: python
             
-            while capture.isOpened():
+            while True:
                
         1. Import in the frame of the input feed and resize it to 640, 480 ratio. 
 
@@ -133,11 +133,11 @@ Tracking a Color
 Tracking a Face
 ^^^^^^^^^^^^^^^^
 
-The steps taken for tracking a face is very similar to tracking a color. We use an cascading calssifier, an ensemble learning 
-model based on the concatenation of several classifiers. We will be using a pretrained xml model named ``haarcascade_frontalface_default.xml``
+The steps taken for tracking a face is very similar to tracking a color. We use an cascading calssifier, an ensemble learning .
+model based on the concatenation of several classifiers. We will be using a pretrained xml model named ``haarcascade_frontalface_default.xml.``
 with our OpenCV function. 
 
-Our tracking model does not involve re-training with new data, hence, we do not need many different model options 
+Our tracking model does not involve re-training with new data, hence, we do not need many different model options.
 similar to the *Tracking a Color* task. 
 
 -   Here are all the libraries used for tracking a color task. 
@@ -198,11 +198,11 @@ similar to the *Tracking a Color* task.
             # Open camera
             capture = cv.VideoCapture(1)
             
-    2. Capture every frame from the camera on loop. Terminate the loop upon closure of the camera.
+    2. Capture every frame from the camera on loop.
 
         .. code-block:: python
             
-            while capture.isOpened():
+            while True:
                
         1. Import in the frame of the input feed and resize it to 640, 480 ratio. 
 
