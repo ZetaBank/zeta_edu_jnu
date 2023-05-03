@@ -48,6 +48,14 @@ Here are the libraries needed for our Mission.
         from mission_lib import Movement
         import Arm_Lib
 
+- For Music controls we will import:
+
+    - os library for publishing ROS topics.
+
+    .. code-block:: python 
+
+        import os
+
 
 mission_lib custom Library
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

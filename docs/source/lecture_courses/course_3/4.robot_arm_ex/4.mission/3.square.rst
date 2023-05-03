@@ -48,14 +48,6 @@ Here are the libraries needed for our Mission.
         from mission_lib_figure import Movement
         import Arm_Lib
 
-- For Music controls we will import:
-
-    - pygame library for the sound drives it provides.
-
-    .. code-block:: python 
-
-        from pygame import mixer
-
 
 mission_lib_figure custom Library
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
