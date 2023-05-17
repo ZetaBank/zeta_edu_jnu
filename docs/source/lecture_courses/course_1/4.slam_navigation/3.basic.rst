@@ -1,7 +1,7 @@
 Basic Features
 =================
 
-1. Map 
+Map 
 --------------
 
 Having an accurate and detailed map is essential when we are navigating. From the start, a navigation system may be equipped with 
@@ -12,7 +12,7 @@ Simultaneous Localization and Mapping (SLAM) is a method which lets the robot cr
 a human being. The SLAM method will be discussed in detail later in the section. 
 
 
-1. Pose of Robot
+Pose of Robot
 ----------------------------
 
 The next thing our robot must be able to do is measure and estimate its pose (position and orientation). Modern cars utilize GPS
