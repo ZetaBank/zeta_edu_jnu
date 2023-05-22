@@ -8,9 +8,9 @@ Mission
             Project Name: Applying Navigation System on our Zetabot
         </p>
         <ul>
-            <li><strong>-</strong> This mission is a <strong>group project</strong>.</li>
-            <li><strong>-</strong> Construct a map within your team.</li>
-            <li><strong>-</strong> Navigate the contructed map with the Zetabot as a team.</li>
+            <li><strong></strong> This mission is a <strong>group project</strong>.</li>
+            <li><strong></strong> Construct a map within your team.</li>
+            <li><strong></strong> Navigate the contructed map with the Zetabot as a team.</li>
             <div>
         </ul>
     </div>
