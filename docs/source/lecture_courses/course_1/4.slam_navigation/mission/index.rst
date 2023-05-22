@@ -6,6 +6,6 @@ Additional explanation needed to manage the robot
 
 .. toctree::
 
-     Administrator manual/index
-     Normal User manual/index
+     mission1.rst
+     mission2.rst
 
