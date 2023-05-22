@@ -1,4 +1,4 @@
-Mission
+How to do the Mission
 =========
 
 .. raw:: html
