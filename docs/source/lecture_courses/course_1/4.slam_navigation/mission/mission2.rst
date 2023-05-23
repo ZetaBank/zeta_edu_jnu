@@ -1,4 +1,4 @@
-Examples
+Mission Examples
 =========
 
 .. raw:: html
@@ -43,39 +43,39 @@ Send robot to desired coordinates
   
 -------------------------------------------------------------------  
   
-T Map
+Map Examples
 ----------------------------------------------
 
-Place the Zetabot on the starting location of the map. 
+.. raw:: html
 
+    <div style="background: #ffe5b4" class="admonition note custom">
+        <p style="background: #ffbf00" class="admonition-title">
+            Mission via target point
+        </p>
+        <ul>
+            <li><strong></strong> Below are three maps.</li>
+            <li><strong></strong> On each map, each waypoint is marked.</li>
+            <li><strong></strong> Create a map with structures. After that, the robot is used to draw the map.</li>
+            <li><strong></strong> The goal is to start at the start point and return to the start point by passing through the destination in order.</li>
+            <li><strong></strong> You can choose from the examples below, or you can create and use your own maps.</li>
+            <div>
+        </ul>
+    </div>
+    
+**D - MAP**
 
-You can see the following screen by opening your web browser and accessing 10.42.0.1:5000:
+.. thumbnail:: /_images/course_1/4.slam_navigation/DMAP.png
 
-.. thumbnail:: /_images/course_1/4.slam_navigation/web_view_add.png
+-----------------------------------------------------------------
 
-1. Select the Mapping button. 
-   
-   - This will start the mapping simulation. Using SLAM method, the robot will utilize its LIDAR sensors as well as multiple odometry sensors to map out its immediate surroundings. 
-   - By using the controller, move the Zetabot around the constructed map to learn its surroundings.  
-     
-     .. thumbnail:: /_images/course_1/4.slam_navigation/web_nav.png
+**T - MAP**
 
+.. thumbnail:: /_images/course_1/4.slam_navigation/TMAP.png
 
-Executing Navigation
----------------------
+------------------------------------------------------------------
 
-Place the Zetabot in the starting position. 
+**WINDMILL - MAP**
 
-- Click on ``Start Nav Goal`` and click the desired location and drag the curser to set which direction the robot should face once it reaches the said location. 
-  
-  .. thumbnail:: /_images/course_1/4.slam_navigation/web_start_nav.png
+.. thumbnail:: /_images/course_1/4.slam_navigation/WINDMILLMAP.png
 
-Team Competition
----------------------
-
-- With other team members, construct a large map with starting and finishing position. Example:
-  
-  .. thumbnail:: /_images/course_1/4.slam_navigation/team_final.png
-
-- Team by team, execute the navigation task with your Zetabot. 
 
