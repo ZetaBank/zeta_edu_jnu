@@ -28,9 +28,9 @@ Get Coordinate Information
   .. thumbnail:: /_images/course_1/4.slam_navigation/odom.png
   
 Send robot to desired coordinates
-- Open navi example on Jupyter hub
-- Enter the x, y coordinate information of the destination
-- You can enter one or more destinations
+ - Open navi example on Jupyter hub
+ - Enter the x, y coordinate information of the destination
+ - You can enter one or more destinations
 
   .. thumbnail:: /_images/course_1/4.slam_navigation/1point.png
   .. thumbnail:: /_images/course_1/4.slam_navigation/manypoints.png
