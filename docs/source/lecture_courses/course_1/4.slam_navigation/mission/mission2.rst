@@ -34,8 +34,6 @@ Send robot to desired coordinates
  - If you want to go through multiple destinations, you can add and edit as many coordinates as the number of destinations in the file of the second picture.
 
   .. thumbnail:: /_images/course_1/4.slam_navigation/1point.png
-  
-----------------------------------------------------------------------------------
 
   .. thumbnail:: /_images/course_1/4.slam_navigation/manypoints.png
   
