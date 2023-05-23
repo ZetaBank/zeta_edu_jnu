@@ -30,15 +30,15 @@ Get Coordinate Information
 Send robot to desired coordinates
  - Open navi example on Jupyter hub
  - Enter the x, y coordinate information of the destination
- - In the first picture, it is possible to move to one destination.
- - If you want to go through multiple destinations, you can add and edit as many coordinates as the number of destinations in the file of the second picture.
-
+ 
 -------------------------------------------------------------------
 
+ - Enter the desired coordinates and the robot will move.
   .. thumbnail:: /_images/course_1/4.slam_navigation/1point.png
   
 -------------------------------------------------------------------
 
+ - You can pass through several destinations.
   .. thumbnail:: /_images/course_1/4.slam_navigation/manypoints.png
   
 Mapping the Constructed Map
