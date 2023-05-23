@@ -1,20 +1,6 @@
 Mission Examples
 =========
 
-.. raw:: html
-
-    <div style="background: #ffe5b4" class="admonition note custom">
-        <p style="background: #ffbf00" class="admonition-title">
-            Project Name: Applying Navigation System on our Zetabot
-        </p>
-        <ul>
-            <li><strong></strong> This mission is a <strong>group project</strong>.</li>
-            <li><strong></strong> Construct a map within your team.</li>
-            <li><strong></strong> Navigate the contructed map with the Zetabot as a team.</li>
-            <div>
-        </ul>
-    </div>
-
 Get coordinate information, Send to desired coordinate
 --------------------------------
 
