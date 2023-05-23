@@ -36,7 +36,6 @@ Send robot to desired coordinates
   .. thumbnail:: /_images/course_1/4.slam_navigation/1point.png
   
 ----------------------------------------------------------------------------------
-
   .. thumbnail:: /_images/course_1/4.slam_navigation/manypoints.png
   
 Mapping the Constructed Map
