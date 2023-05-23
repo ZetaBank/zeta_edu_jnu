@@ -36,7 +36,7 @@ You can see the following screen by opening your web browser and accessing 10.42
 
 .. thumbnail:: /_images/course_1/4.slam_navigation/web_view_add.png
 
-1. Select the Mapping button. 
+Mapping 
    
    - This will start the mapping simulation. Using SLAM method, the robot will utilize its LIDAR sensors as well as multiple odometry sensors to map out its immediate surroundings. 
    - By using the controller, move the Zetabot around the constructed map to learn its surroundings.  
