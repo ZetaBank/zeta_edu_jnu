@@ -13,23 +13,23 @@ Get Coordinate Information
 
   .. thumbnail:: /_images/course_1/4.slam_navigation/goalpose.png
 
--------------------------------------------------------------------
+|
   
 Send robot to desired coordinates
  - Open navi example on Jupyter hub
  - Enter the x, y coordinate information of the destination
 
--------------------------------------------------------------------
+|
 
  - Enter the desired coordinates and the robot will move.
   .. thumbnail:: /_images/course_1/4.slam_navigation/1point.png
-  
--------------------------------------------------------------------
+
+|
 
  - You can pass through several destinations.
   .. thumbnail:: /_images/course_1/4.slam_navigation/manypoints.png
-  
--------------------------------------------------------------------  
+
+|
   
 Map Examples
 ----------------------------------------------
