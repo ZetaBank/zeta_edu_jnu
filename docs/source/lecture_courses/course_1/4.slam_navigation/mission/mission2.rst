@@ -7,11 +7,11 @@ Get coordinate information, Send to desired coordinate
 Before the mission, I will explain how to get the coordinates and how to move to the specified coordinates.
 
 Get Coordinate Information
- - Place the robot where you want it.
- - Connect to ISSAC on the left side of the GUI
- - If you place the mouse over the odometry-position graph, you can get the x and y coordinates.
+ - Run the goal_position example on Jupyter Hub.
+ - Take a target point using the Start Nav Goal function in the Web GUI.
+ - Looking at the picture below, the x, y coordinates are output.
 
-  .. thumbnail:: /_images/course_1/4.slam_navigation/odom.png
+  .. thumbnail:: /_images/course_1/4.slam_navigation/goalpose.png
   
 Send robot to desired coordinates
  - Open navi example on Jupyter hub
