@@ -68,7 +68,7 @@ In Education Provided by ZetaBank:
 
 
 .. toctree:: 
-    :caption: Experience | new AI robot technology
+    :caption: Experience new AI robot technology
     :hidden:
 
     lecture_courses/course_1/1.index
