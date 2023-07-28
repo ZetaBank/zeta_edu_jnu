@@ -1,0 +1,11 @@
+Training
+=============================================
+
+
+Here are the contents for this section:
+
+.. toctree:: 
+
+    1.arm_pick
+    2.segment
+    3.ros_pub
