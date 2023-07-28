@@ -1,0 +1,58 @@
+Let's Protect the Earth from Naughty Monsters!
+=========================
+
+.. thumbnail:: /_images/Day1/5.gotcha/save_earth.png
+
+- A naughty monster is attacking Earth.
+
+- To keep the peace on Earth, the ZETABOT have equipped themselves with powerful weapons.
+
+- Now, let's defeat naughty monsters with zetabot and keep the peace on earth!
+
+How to Play
+-----------------------
+
+.. thumbnail:: /_images/Day1/5.gotcha/gotcha2.png
+
+1. The autonomous driving ai robot is equipped with a robotic arm. The object of the game is to pick up the doll with the robotic arm and return it to the starting point.
+
+2. The robot and robot arm can be moved with a joystick. The joystick operation method is as follows.
+
+.. thumbnail:: /_images/Day1/5.gotcha/joystick1.png
+
+.. thumbnail:: /_images/Day1/5.gotcha/joystick2.png
+
+3. Large and small dolls of various sizes are placed on the table.
+
+4. Use the joystick to move the robot toward the table, and then manipulate the robot arm to pick up the doll.
+
+5. If you succeed in defending earth, there may be rewards!
+
+Rules
+-----------------------
+
+.. thumbnail:: /_images/Day1/5.gotcha/ui1-1.png
+
+- Touch the second 'Capture Monster'.
+
+.. thumbnail:: /_images/Day1/5.gotcha/ui1-2.png
+
+- A screen similar to the picture above will appear.
+
+.. thumbnail:: /_images/Day1/5.gotcha/ui1-3.png
+
+- The first round has a 3 minute time limit.
+
+    - Individuals use the robot to pick up toys and become accustomed to operating the robot arm.
+
+.. thumbnail:: /_images/Day1/5.gotcha/ui1-4.png
+
+- The second round has a 2 minute time limit.
+
+    - Each team has 2 minutes to hold the doll and select the best representative.
+
+.. thumbnail:: /_images/Day1/5.gotcha/ui1-5.png
+
+- The last round has a 1 minute time limit.
+
+    - The selected representative achieves the goal within the time limit.
