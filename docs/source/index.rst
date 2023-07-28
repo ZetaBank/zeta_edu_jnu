@@ -6,10 +6,13 @@ Chonnam National University Instructors Manual
 
 .. toctree:: 
     :caption: Theory
+    :maxdepth: 1
     :hidden:
-    
+    :titlesonly: 
+
     lecture_courses/course_2/1.index
     lecture_courses/course_2/5.robot_arm_ex/1.index
+
 
 .. toctree:: 
     :caption: Training
