@@ -2,7 +2,7 @@ Chonnam National University Instructors Manual
 ===================
 
 
-  .. thumbnail:: /_images/intro/chart.png
+.. thumbnail:: /_images/intro/chart.png
 
 .. toctree:: 
     :caption: Theory
