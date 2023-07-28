@@ -54,63 +54,13 @@ In Education Provided by ZetaBank:
 
 
 
-.. toctree:: 
-    :caption: Nano Degree Program
-    :maxdepth: 1
-    :hidden:
-    :titlesonly: 
-
-    0.intro/introduction
-    0.intro/explanation
-    0.intro/coding_ex
-    0.intro/robot_ex
-    0.intro/mission
-
-
-.. toctree:: 
-    :caption: Experience new AI robot technology
-    :hidden:
-
-    lecture_courses/course_1/1.index
-    lecture_courses/course_1/2.robot_control/1.index
-    lecture_courses/course_1/3.ai_image_recognition/1.index
-    lecture_courses/course_1/4.slam_navigation/1.index
-    lecture_courses/course_1/5.robot_arm_ex/1.index
-
-
 
 .. toctree:: 
     :caption: New approach to beginner coding education
     :hidden:
     
     lecture_courses/course_2/1.index
-    lecture_courses/course_2/2.ai_pose_detect/1.index
-    lecture_courses/course_2/3.robot_control_move/1.index
-    lecture_courses/course_2/4.make_robot/1.index
     lecture_courses/course_2/5.robot_arm_ex/1.index
-   
-.. toctree:: 
-    :caption: AI Robot Application & Utilization Academy
-    :hidden:
-   
-    lecture_courses/course_3/1.index
+    lecture_courses/course_3/3.ai_segmentation_depth/1.index.html
     lecture_courses/course_3/2.robot_driving_ros/1.index
-    lecture_courses/course_3/3.ai_segmentation_depth/1.index
-    lecture_courses/course_3/4.robot_arm_ex/1.index
-
-.. toctree:: 
-    :maxdepth: 6
-    :hidden:
-    :caption: Future Industry: AI Robot Academy
-    
-    lecture_courses/course_4/1.index
-    lecture_courses/course_4/2.ai_tao/1.index
-    lecture_courses/course_4/3.robot_competition_ex/1.index
-
-
-.. toctree::
-    :maxdepth: 6
-    :hidden:
-    :caption: A New World with AI Robots
-
-    robot_coding/day_four/index
+    lecture_courses/course_2/4.make_robot/1.index
