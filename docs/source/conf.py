@@ -2,7 +2,7 @@
 
 # -- Project information
 
-project = 'Instructors Version'
+project = 'Chonnam National University Instructors Version'
 # copyright = '2021, Graziella'
 author = 'Zetabank'
 
