@@ -5,9 +5,7 @@ Chonnam National University Instructors Manual
 
 .. toctree:: 
     :caption: Theory
-    :maxdepth: 1
     :hidden:
-    :titlesonly: 
 
     courses/course_1/0.index
 
