@@ -1,58 +1,46 @@
 Interface UI
 =========================
 
-.. thumbnail:: /_images/Day1/5.gotcha/save_earth.png
-
-- A naughty monster is attacking Earth.
-
-- To keep the peace on Earth, the ZETABOT have equipped themselves with powerful weapons.
-
-- Now, let's defeat naughty monsters with zetabot and keep the peace on earth!
-
-How to Play
+Overall
 -----------------------
 
-.. thumbnail:: /_images/Day1/5.gotcha/gotcha2.png
+.. thumbnail:: /_images/Day1/5.gotcha/ui_base.png
 
-1. The autonomous driving ai robot is equipped with a robotic arm. The object of the game is to pick up the doll with the robotic arm and return it to the starting point.
+- The entire UI is like the picture above.
 
-2. The robot and robot arm can be moved with a joystick. The joystick operation method is as follows.
+- You can enjoy various entertainment projects through the UI.
 
-.. thumbnail:: /_images/Day1/5.gotcha/joystick1.png
+- The first is 'Performing with a robot'.
 
-.. thumbnail:: /_images/Day1/5.gotcha/joystick2.png
+- The Second is 'Catching monsters'.
 
-3. Large and small dolls of various sizes are placed on the table.
+- The third is 'Artificial Intelligence Education'.
 
-4. Use the joystick to move the robot toward the table, and then manipulate the robot arm to pick up the doll.
+- Finally, 'Let's save robots and the earth'.
 
-5. If you succeed in defending earth, there may be rewards!
+- You can enter sub-menus by clicking each button.
 
-Rules
+Performing with a robot
+-----------------------
+
+.. thumbnail:: /_images/Day1/3.arm_dance/ui2-1.png
+
+- Click the 'Performing with a robot' button.
+
+.. thumbnail:: /_images/Day1/3.arm_dance/ui2-2.png
+
+- After waiting for a while, click the 'start' button and the robot arm will dance to the music.
+
+Catching monsters
 -----------------------
 
 .. thumbnail:: /_images/Day1/5.gotcha/ui1-1.png
 
-- Touch the second 'Capture Monster'.
+- Click the 'Catching monsters' button.
 
 .. thumbnail:: /_images/Day1/5.gotcha/ui1-2.png
 
-- A screen similar to the picture above will appear.
+- A timer of 3 minutes for each individual, 2 minutes for each team, and 1 minute for the team is given in order of each button.
 
-.. thumbnail:: /_images/Day1/5.gotcha/ui1-3.png
+- Enjoy catching monsters at the click of a button that suits the situation.
 
-- The first round has a 3 minute time limit.
-
-    - Individuals use the robot to pick up toys and become accustomed to operating the robot arm.
-
-.. thumbnail:: /_images/Day1/5.gotcha/ui1-4.png
-
-- The second round has a 2 minute time limit.
-
-    - Each team has 2 minutes to hold the doll and select the best representative.
-
-.. thumbnail:: /_images/Day1/5.gotcha/ui1-5.png
-
-- The last round has a 1 minute time limit.
-
-    - The selected representative achieves the goal within the time limit.
