@@ -1,6 +1,20 @@
 Interface UI
 =========================
 
+.. raw:: html
+
+    <div style="background: #C3F8FF" class="admonition note custom">
+        <p style="background: light-blue" class="admonition-title">
+            Follow Along: About Interface UI
+        </p>
+        <div class="line-block">
+            <div class="line"><strong>-</strong> This is a description of the UI and various contents.</div>
+            <div class="line"><strong>-</strong> Know the content and purpose of each item. </div>
+        </div>
+    </div>
+
+.. raw:: html
+
 Overall
 -----------------------
 

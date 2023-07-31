@@ -1,6 +1,20 @@
 JupterLab Access & Run examples
 ================
 
+.. raw:: html
+
+    <div style="background: #C3F8FF" class="admonition note custom">
+        <p style="background: light-blue" class="admonition-title">
+            Follow Along: About Codespace and JupyterHub
+        </p>
+        <div class="line-block">
+            <div class="line"><strong>-</strong> Most of the code can be run on JupyterHub.</div>
+            <div class="line"><strong>-</strong> Describes how to run code on JupyterHub. </div>
+        </div>
+    </div>
+
+.. raw:: html
+
 1. Access Zetabot JupyterLab and run the Topic Publish example
 
   * JupyterLab Access

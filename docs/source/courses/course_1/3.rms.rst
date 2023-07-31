@@ -5,11 +5,10 @@ RMS (Robot Management System)
 
     <div style="background: #C3F8FF" class="admonition note custom">
         <p style="background: light-blue" class="admonition-title">
-            Follow along: Let's move the AI robot to its destination
+            Follow Along: Let's move the AI robot to its destination
         </p>
         <div class="line-block">
-            <div class="line"><strong>-</strong> This mission is an <strong>team project</strong></div>
-            <div class="line"><strong>-</strong> Move the AI robot to the destination using navigation, camera and mouse manipulation on the web UI page.</div>
+            <div class="line"><strong>-</strong> Move the AI robot to the destination using navigation, camera and mouse manipulation on the RMS page.</div>
             <div class="line"><strong>-</strong> With your team members, see the different visual outcomes by moving the robot using "driving robot" examples. </div>
         </div>
     </div>

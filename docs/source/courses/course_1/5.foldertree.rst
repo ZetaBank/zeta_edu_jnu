@@ -1,5 +1,20 @@
 Organize folders and code
 =========
+
+.. raw:: html
+
+    <div style="background: #C3F8FF" class="admonition note custom">
+        <p style="background: light-blue" class="admonition-title">
+            Follow Along: About code structure
+        </p>
+        <div class="line-block">
+            <div class="line"><strong>-</strong> Codes that can be executed are divided by item in JupyterHub.</div>
+            <div class="line"><strong>-</strong> Let's take a quick look at what codes are. </div>
+        </div>
+    </div>
+
+.. raw:: html
+
 .. thumbnail:: /_images/ai_autonomous_robot/foldertree.png
 
 - If you go into the lecture folder of jupyterhub, you can see the following folders.
