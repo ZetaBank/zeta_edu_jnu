@@ -44,3 +44,25 @@ Catching monsters
 
 - Enjoy catching monsters at the click of a button that suits the situation.
 
+Artificial Intelligence Education
+-----------------------
+
+.. thumbnail:: /_images/Day1/5.gotcha/ui3.png
+
+- Click the 'Artificial Intelligence Education' button.
+
+.. thumbnail:: /_images/Day1/3.arm_dance/ui2-2.png
+
+- After waiting for a while, press the 'start' button to close the UI window, and AI training is ready to run.
+
+Let's save robots and the earth
+-----------------------
+
+.. thumbnail:: /_images/Day1/5.gotcha/ui4.png
+
+- Click the 'Let's save robots and the earth' button.
+
+.. thumbnail:: /_images/Day1/3.arm_dance/ui2-2.png
+
+- After waiting for a while, press the 'start' button to start the relay race.
+
