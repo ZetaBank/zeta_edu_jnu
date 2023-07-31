@@ -1,239 +1,284 @@
-Mission 
-=======================
+Segmentation Examples
+==============
 
 
 .. raw:: html
 
-    <div style="background: #ffe5b4" class="admonition note custom">
-        <p style="background: #ffbf00" class="admonition-title">
-            Project Name: Custom Segmentation System
+    <div style="background: #C3F8FF" class="admonition note custom">
+        <p style="background: light-blue" class="admonition-title">
+            Follow along: Segmentation Examples
         </p>
         <div class="line-block">
-            <div class="line"><strong>-</strong> This mission is an <strong>individual project</strong></div>
-            <div class="line"><strong>-</strong> Create the custom segmetation program which utilizes zetabot camera.</div>
-            <div class="line"><strong>-</strong> Within your individual computers, execute the following mission.  </div>
+            <div class="line">The program launching process along with parameter settings are all simplified and set up on the Jupyter Notebook Environment.</div>
+            <div class="line">The segmentation task is able to operate with various input pictures. Here are the examples:</div>
         </div>
+        <ul>
+            <li>City Scapes</li>
+            <li>Outdoor (off-road)</li>
+            <li>Segmenting Human Images</li>
+            <li>Variaty Objects and People</li>
+            <li>In-Doors</li>
+        </ul>
+        <div class="line">(The Jetson Board used for these examples are => Jetson Nano)</div>
     </div>
 
-Writing Custom segNet Program
----------------------------------
+.. raw:: html
 
-Similar to how we created a new python file in our team assignment, generate a new python file and name it ``02_5-2. segmentation_camera.py``.
+    <hr>
 
-Create a new python file in the Jupyter Notebook Environment:
+-   02_5-1. segmentation.ipynb
+-   | Running the cell code
+    | `Ctrl + Enter`
 
--   Press the blue plus button on the top left corner of the web.
+.. thumbnail:: /_images/course_3/3.ai_segmentation_depth/segmentation.png
 
-    .. thumbnail:: /_images/ai_training/add_plus.png
+
+-   Initialize your output stream, and your path, and import in the Image library
+
+.. code-block:: python
+
+    from IPython.display import Image
+
+    %env DISPLAY=:0
+    %env PROGRAM_PATH=/home/zeta/jetson-inference/build/aarch64/bin
+    %env INPUT_PATH=/home/zeta/jetson-inference/build/aarch64/bin/images
+    %env OUTPUT_PATH=/home/zeta/jetson-inference/build/aarch64/bin/images/test
+
+    input_path='/home/zeta/jetson-inference/build/aarch64/bin/images'
+    output_path='/home/zeta/jetson-inference/build/aarch64/bin/images/test'
+
+
+CityScapes
+-----------
+
+-   Check all the available pictures within the system
+
+    .. code-block:: python
+
+        !ls $INPUT_PATH/city_*
+
+
+-   Pick one of the images with urban city scene and initialize the image/ output name. 
+
+    .. code-block:: python
+
+        image_name = 'ChangeMe'
+        output_name = 'city_result.jpg'
+        %env IMAGE_NAME = $image_name
+        %env OUTPUT_NAME = $output_name
+
+        Image(filename=input_path+'/'+image_name) 
+
+
+    .. thumbnail:: /_images/course_3/3.ai_segmentation_depth/city.jpg
 
 |
 
--   Create a new python file by pressing the ``Python File`` button
-
-    .. thumbnail:: /_images/ai_training/pick_python.png
-
-|
-
--   Rename the untitiled python file to ``02_5-2. segmentation_camera.py``
-
-
--   On the new python file, import the libraries necessary. For our segmentation task, we need to import the Jetson inference library modules and jetson utility library modules
-
-    -   ``argparse``: This library contains modules that are responsbile for bringing and intitializing the flags or parameters set by the user when envoking the program.
-    -   ``sys``: this library allows us to manipulate/ utilize system functions within our python programs. 
-
-    -   ``jetson_inference``: This library contains all the pre-built networks that can be used for inference task and a functions that would allow for custom models to be used for inference tasks.
-
-        -   ``setNet``: We are importing segNet module for our segmentation task. 
-
-
-    -   ``jetson_utils``: This library contains modules that are responsible for processing input and output sources along with output stream methods. We will be importing the following modules:
-
-        -   ``videoSource``: used to process input source (whether it is a camera, an image, or a video).
-        -   ``videoOutput``: used to process the output stream.
-        -   ``cudaOverlay``: this module allows for overlay on the output stream.
-        -   ``cudaDeviceSynchronize``: This module allows for cuda devices and processes to synchronize.
-
-    -   ``segnet_utils``: This library allows for buffer segmentation methods. 
-
-    .. code-block:: python
-
-        import argparse
-        import sys
-
-        from jetson_inference import segNet
-        from jetson_utils import videoSource, videoOutput, cudaOverlay, cudaDeviceSynchronize
-
-        from segnet_utils import *
-
-
--   After all the libraries are imported, initialize the parser variable with ``argparse.ArgumentParser`` module. 
-
-    For our mission, we must receive the network name, and Camera output channel name. Additionally we add our minor functinoality flags.
-
-    .. code-block:: python
-
-        # parse the command line
-        # For our mission, We recieve the network name, and Camera name. 
-        # Set up argument parser, so that command line parameters can be read within the program
-        parser = argparse.ArgumentParser(description="Segment a live camera stream using an semantic segmentation DNN.",
-                                        formatter_class=argparse.RawTextHelpFormatter,
-                                        epilog=segNet.Usage() + videoSource.Usage() + videoOutput.Usage())
-
-        # Major Functionality parameters (required from the user)
-        parser.add_argument("input_CAMERA", type=str, default="", nargs='?', help="use csi://0 for Raspberry pi Camera")
-        parser.add_argument("--network", type=str, default="", help="pre-trained model to load")
-
-        # Minor Functionality parameters (optional)
-        parser.add_argument("--filter-mode", type=str, default="linear", choices=["point", "linear"], help="filtering mode used during visualization, options are:\n  'point' or 'linear' (default: 'linear')")
-        parser.add_argument("--visualize", type=str, default="overlay,mask", help="Visualization options (can be 'overlay' 'mask' 'overlay,mask'")
-        parser.add_argument("--ignore-class", type=str, default="void", help="optional name of class to ignore in the visualization results (default: 'void')")
-        parser.add_argument("--alpha", type=float, default=150.0, help="alpha blending value to use during overlay, between 0.0 and 255.0 (default: 150.0)")
-        parser.add_argument("--stats", action="store_true", help="compute statistics about segmentation mask class output")
-
-
--   Initialize opt variable to hold all the user-set flags in a list form. If the user has set no flags, terminate the program:
-
-    .. code-block:: python
-
-        # If no parameter is given from the user, shut the program down
-        try:
-            opt = parser.parse_known_args()[0]
-        except:
-            print("")
-            parser.print_help()
-            sys.exit(0)
-    
--   Initialize the necessary variables. Since we wish to infer a network with a camera and show the results with our output stream we will need:
-
-    1.  ``net`` variable for holding the nvidia pre-built networks. For this mission we are using FCN-Resnet18-VOC (you may change this to FCN-ResNet18-Sun for indoor segmentation) network.
-    2.  ``input`` variable for handling the input stream. Using the ``opt`` variable created in our previous step, we will bring in input_CAMERA to set our videoSource.
-    3.  ``display`` variable for handling the output stream. Although we are accessing the code remotely on our remote computer, the zetabot is equipped with a touch screen display. The display is set on ``DISPLAY://0``
-    4.  ``buffer`` variable for managing buffer. 
-
-    .. code-block:: python
-
-        # load the segmentation network
-        net = segNet(opt.network, sys.argv)
-
-        # set the alpha blending value
-        net.SetOverlayAlpha(opt.alpha)
-
-        # create video sources & outputs
-        input = videoSource(opt.input_CAMERA, argv=sys.argv)
-        output = videoOutput("DISPLAY://0", argv=sys.argv)
-        # create buffer manager
-        buffers = segmentationBuffers(net, opt)
-    
--   For this task we are utilizing our camera. On our previous trials, we had to to an inference on a single image. The program could recieve the one image infer it with the network and output a single result. 
-
-    But with a camera, we need to repeatedly run the inference so that we may capture the incoming frames from the camera and output a constant stream of results. 
-
-    -   We may achieve this by running a while loop until an envoked output stream window is killed by the user. 
-
-        .. code-block:: python
-
-            # process frames until the user exits
-            while display.IsStreaming():
-    
-    -   Within the while loop:
-
-        -   Capture the current frame from the camera, allocate buffer for the size of the camera and infer the image using the trained model.
-
-            .. code-block:: python
-
-                # Capture each of the frames of camera
-                img = camera.Capture()
-
-                # allocate buffers for this size image
-                buffers.Alloc(img.shape, img.format)
-
-                # process the segmentation network
-                net.Process(img, ignore_class=opt.ignore_class)
-
-        -   Overlay the resulting heatmap and mask with with the buffer. 
-
-            .. code-block:: python
-
-                # generate the overlay
-                if buffers.overlay:
-                    net.Overlay(buffers.overlay, filter_mode=opt.filter_mode)
-
-                # generate the mask
-                if buffers.mask:
-                    net.Mask(buffers.mask, filter_mode=opt.filter_mode)
-
-                # composite the images
-                if buffers.composite:
-                    cudaOverlay(buffers.overlay, buffers.composite, 0, 0)
-                    cudaOverlay(buffers.mask, buffers.composite, buffers.overlay.width, 0)
-        
-        -   Render the result output and update the title bar of the output window.
-
-            .. code-block:: python 
-
-                # render the output image
-                output.Render(buffers.output)
-
-                # update the title bar
-                output.SetStatus("{:s} | Network {:.0f} FPS".format(opt.network, net.GetNetworkFPS()))
-
-
-
-Executing the Custom Program
------------------------------
-
--   Open the ``02_5-3. segmentation_camera.ipynb`` notebook.
-
-.. thumbnail:: /_images/course_3/3.ai_segmentation_depth/segmentation_camera.png
-
-|
-
--   Run the cell code which initializes the input/ output stream of the environment as well as the CAMERA variable, which will be the flag that determines the input vairable for the program to be a camera stream. 
-
-    .. code-block:: python 
-
-        %env DISPLAY=:0
-        %env csi=:0
-        %env CAMERA=csi://0
-
--   Check if your python notebook can read the python code you have written:
-
-    .. code-block:: python
-
-        !cat /home/zeta/notebook/lecture/'2.AI Training Examples'/'5-2. segmentation_camera.py'
-
--   One important thing about the zetabot is that the Raspberry Pi camera is constantly running.
-
-    In order to use the camera for our task we must disable it first by running the following command:
+-   Segment the picture
 
     .. code-block:: python
 
         %%capture
-        !pm2 stop 5
-    
-    This will allow the camera to be used for our program. 
+        !python3 $PROGRAM_PATH/segnet.py --network=fcn-resnet18-cityscapes $INPUT_PATH/$IMAGE_NAME $OUTPUT_PATH/$OUTPUT_NAME
 
--   Execute the segmentation_camera python code. 
 
-    *Note* that we are setting our major functions,
-    
-    -   ``--network``: to set which networks to use in our segmentation task.
-    
-        -   You may change the pre-trained networks to the previously discussed networks.
-  
-    -   ``input_CAMERA``: to set which input stream will be used for our task. It is being set to CAMERA environment variable which holds ``csi://0`` as a string. 
+
+|
+
+-   Show the resulting image
+
+
+    .. code-block:: python
+
+        Image(filename=output_path+'/city_result.jpg') 
+
+
+    .. thumbnail:: /_images/course_3/3.ai_segmentation_depth/city_seg.jpg
+
+Outdoor (off-road)
+-------------------
+
+-   Check all the available pictures within the system
+
+    .. code-block:: python
+
+        !ls $INPUT_PATH/trail_*
+
+
+-   Pick one of the images with outdoor scenes and initialize the image/ output name. 
+
+    .. code-block:: python
+
+        image_name = 'ChangeMe'
+        output_name = 'trail_result.jpg'
+        %env IMAGE_NAME = $image_name
+        %env OUTPUT_NAME = $output_name
+
+        Image(filename=input_path+'/'+image_name) 
+
+
+    .. thumbnail:: /_images/course_3/3.ai_segmentation_depth/outdoor.jpg
+
+|
+
+-   Segment the picture
 
     .. code-block:: python
 
         %%capture
-        !python3 /home/zeta/notebook/lecture/'2.AI Training Examples'/'5-2. segmentation_camera.py' --network=fcn-resnet18-voc $CAMERA
+        !python3 $PROGRAM_PATH/segnet.py --network=fcn-resnet18-deepscene $INPUT_PATH/$IMAGE_NAME $OUTPUT_PATH/$OUTPUT_NAME
 
--   Be sure to turn the camera back online by:
+
+|
+
+-   Show the resulting image
+
+
+    .. code-block:: python
+
+        Image(filename=output_path+'/trail_result.jpg') 
+
+
+    .. thumbnail:: /_images/course_3/3.ai_segmentation_depth/outdoor_seg.jpg
+
+
+Segmenting Human Images
+-------------------------
+
+-   Check all the available human pictures within the system
+
+    .. code-block:: python
+
+        !ls $INPUT_PATH/humans_*
+
+
+
+-   Pick one of the images with people and initialize the image/ output name. 
+
+    .. code-block:: python
+
+        image_name = 'ChangeMe'
+        output_name = 'humans_seg_result.jpg'
+        %env IMAGE_NAME = $image_name
+        %env OUTPUT_NAME = $output_name
+
+        Image(filename=input_path+'/'+image_name) 
+
+    .. thumbnail:: /_images/course_3/3.ai_segmentation_depth/people.jpg
+
+|
+
+-   Segment the picture
 
     .. code-block:: python
 
         %%capture
-        !pm2 start 5
+        !python3 $PROGRAM_PATH/segnet.py --network=fcn-resnet18-mhp $INPUT_PATH/$IMAGE_NAME $OUTPUT_PATH/$OUTPUT_NAME
 
 
+
+|
+
+-   Show the resulting image
+
+
+    .. code-block:: python
+
+        Image(filename=output_path+'/humans_seg_result.jpg') 
+
+
+    .. thumbnail:: /_images/course_3/3.ai_segmentation_depth/people_seg.jpg
+
+
+Variaty Objects and People
+----------------------------
+
+-   Check all the available pictures within the system
+
+    .. code-block:: python
+
+        !ls $INPUT_PATH/object_*
+
+
+-   Pick one of the images with variaty of objects and people and initialize the image/ output name. 
+
+    .. code-block:: python
+
+        image_name = 'ChangeMe'
+        output_name = 'object_result.jpg'
+        %env IMAGE_NAME = $image_name
+        %env OUTPUT_NAME = $output_name
+
+        Image(filename=input_path+'/'+image_name) 
+
+
+    .. thumbnail:: /_images/course_3/3.ai_segmentation_depth/object.jpg
+
+|
+
+-   Segment the picture
+
+    .. code-block:: python
+
+        %%capture
+        !python3 $PROGRAM_PATH/segnet.py --network=fcn-resnet18-voc $INPUT_PATH/$IMAGE_NAME $OUTPUT_PATH/$OUTPUT_NAME
+
+
+
+|
+
+-   Show the resulting image
+
+
+    .. code-block:: python
+
+        Image(filename=output_path+'/object_result.jpg') 
+
+
+    .. thumbnail:: /_images/course_3/3.ai_segmentation_depth/object_seg.jpg
+
+
+In-Doors
+-----------
+
+-   Check all the available pictures within the system
+
+    .. code-block:: python
+
+        !ls $INPUT_PATH/room_*
+
+
+-   Pick one of the images with urban city scene and initialize the image/ output name. 
+
+    .. code-block:: python
+
+        image_name = 'ChangeMe'
+        output_name = 'room_result.jpg'
+        %env IMAGE_NAME = $image_name
+        %env OUTPUT_NAME = $output_name
+
+        Image(filename=input_path+'/'+image_name) 
+ 
+    .. thumbnail:: /_images/course_3/3.ai_segmentation_depth/indoor.jpg
+
+|
+
+-   Segment the picture
+
+    .. code-block:: python
+
+        %%capture
+        !python3 $PROGRAM_PATH/segnet.py --network=fcn-resnet18-sun $INPUT_PATH/$IMAGE_NAME $OUTPUT_PATH/$OUTPUT_NAME
+
+
+|
+
+-   Show the resulting image
+
+
+    .. code-block:: python
+
+        Image(filename=output_path+'/room_result.jpg') 
+
+
+    .. thumbnail:: /_images/course_3/3.ai_segmentation_depth/indoor_seg.jpg

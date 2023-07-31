@@ -1,16 +1,15 @@
-Let's Explore the Inside of the Robot's Body!
+Hardware
 ================
 
 .. raw:: html
 
     <div style="background: #C3F8FF" class="admonition note custom">
         <p style="background: light-blue" class="admonition-title">
-            Follow Along: Robot Sensor Visualization
+            Follow Along: About ZETABOT and its hardware
         </p>
         <div class="line-block">
-            <div class="line"><strong>-</strong> This mission is an <strong>team project</strong></div>
-            <div class="line"><strong>-</strong> Access the Isaac Sight server and monitor the robot's sensors.</div>
-            <div class="line"><strong>-</strong> While moving the robot, check the change amount of the sensors according to the change of the robot. </div>
+            <div class="line"><strong>-</strong> Describes the Zetabot and its hardware.</div>
+            <div class="line"><strong>-</strong> You can understand the big concept of Zetabot. </div>
         </div>
     </div>
 

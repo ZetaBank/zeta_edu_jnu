@@ -1,4 +1,4 @@
-Let's Protect the Earth from Naughty Monsters!
+Interface UI
 =========================
 
 .. thumbnail:: /_images/Day1/5.gotcha/save_earth.png

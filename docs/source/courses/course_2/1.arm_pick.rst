@@ -1,19 +1,16 @@
-Mission Project
+Robot Arm Pick and Place System
 ==================
 
 .. raw:: html
 
     <div style="background: #ffe5b4" class="admonition note custom">
         <p style="background: #ffbf00" class="admonition-title">
-            Project Name: Robot Arm Pick and Place System
+            Follow along: Robot Arm Pick and Place System
         </p>
         <div class="line-block">
-            <div class="line"><strong>-</strong> This mission is a <strong>group project.</strong></div>
-            <div class="line"><strong>-</strong> Within your team, create a custom robot arm control system.</div>
             <div class="line"><strong>-</strong> System should be able to:</div>
             <div class="line">&emsp;<strong>1.</strong> Generate Graphical User Interface (GUI) that displays the robot arm camera.</div>
             <div class="line">&emsp;<strong>2.</strong> Controls that would allow the robot arm to move and pick up objects.</div>
-            <div class="line"><strong>-</strong> It is recommended that the final code be on the Leaders computer. (Simultaneous commands to the robot must be avoided!)</div>
         </div>
     </div>
 
