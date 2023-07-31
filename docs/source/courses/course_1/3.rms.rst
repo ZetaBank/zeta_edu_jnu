@@ -9,7 +9,7 @@ RMS (Robot Management System)
         </p>
         <div class="line-block">
             <div class="line"><strong>-</strong> Move the AI robot to the destination using navigation, camera and mouse manipulation on the RMS page.</div>
-            <div class="line"><strong>-</strong> With your team members, see the different visual outcomes by moving the robot using "driving robot" examples. </div>
+            <div class="line"><strong>-</strong> See the different visual outcomes by moving the robot using "driving robot" examples. </div>
         </div>
     </div>
 

@@ -16,7 +16,7 @@ Robot Sensor Visualization
 .. raw:: html
 
     <div style="position: relative; color: black; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-        <h2>Overall Description:</h2>
+        <h2>Overall Description</h2>
     </div>
 
 With our examples of Topics and Nodes within the ROS we were able to establish unidirectional communication channel topic and communicate with 
@@ -64,10 +64,3 @@ Checking Visuals
 
 
 Lets move our robot to check how the visuals of the sensors change. 
-
-Open the below jupyter file...
-
-
-
-
-

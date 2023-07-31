@@ -5,11 +5,11 @@ JupterLab Access & Run examples
 
     <div style="background: #C3F8FF" class="admonition note custom">
         <p style="background: light-blue" class="admonition-title">
-            Follow Along: About Codespace and JupyterHub
+            Follow Along: About Codespace and JupyterLab
         </p>
         <div class="line-block">
-            <div class="line"><strong>-</strong> Most of the code can be run on JupyterHub.</div>
-            <div class="line"><strong>-</strong> Describes how to run code on JupyterHub. </div>
+            <div class="line"><strong>-</strong> Most of the code can be run on JupyterLab.</div>
+            <div class="line"><strong>-</strong> Describes how to run code on JupyterLab. </div>
         </div>
     </div>
 
@@ -57,7 +57,7 @@ How to run code
   * Run the cells
   
     .. code:: 
-    
+    With your team members, se
       Ctrl + Enter
 
     .. thumbnail:: /_images/ai_autonomous_robot/jup7.jpg
