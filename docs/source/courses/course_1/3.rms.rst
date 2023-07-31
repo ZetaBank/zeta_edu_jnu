@@ -13,11 +13,17 @@ RMS (Robot Management System)
         </div>
     </div>
 
+.. raw:: html
+
+How to connect
+-----------------------
+
 .. thumbnail:: /_images/Day2/4.drive_team/ui1.png
 
 - Open a browser and connect to `<http://10.42.0.1:5000/>`_.
 
-|
+How to control the robot
+-----------------------
 
 .. thumbnail:: /_images/Day2/4.drive_team/ui2.png
 

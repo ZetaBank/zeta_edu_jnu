@@ -15,6 +15,9 @@ JupterLab Access & Run examples
 
 .. raw:: html
 
+How to connect
+-----------------------
+
 1. Access Zetabot JupyterLab and run the Topic Publish example
 
   * JupyterLab Access
@@ -28,14 +31,17 @@ JupterLab Access & Run examples
     
     .. code::
      
-     username: zeta
-     password: 1
+     username: zetabank
+     password: 12345678
     .. thumbnail:: /_images/ai_autonomous_robot/jup2.jpg
     
   * JupyterLab Main Page
     
     .. thumbnail:: /_images/ai_autonomous_robot/jup3.jpg
-  
+
+How to run code
+-----------------------
+
   * Moving to lecture folder
   
     .. thumbnail:: /_images/ai_autonomous_robot/jup4.jpg
