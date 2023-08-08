@@ -15,7 +15,7 @@ Robot Arm Pick and Place System
     </div>
 
 -   Go to '5.Robot Arm/mission2' Folder.
--   mission-pnp..ipynb
+-   mission-pnp.ipynb
 -   | Running the cell code
     | `Ctrl + Enter`
 
