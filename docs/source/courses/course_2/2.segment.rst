@@ -26,6 +26,7 @@ Segmentation Examples
 
     <hr>
 
+-   Go to '2.AI Training Examples' Folder.
 -   02_5-1. segmentation.ipynb
 -   | Running the cell code
     | `Ctrl + Enter`

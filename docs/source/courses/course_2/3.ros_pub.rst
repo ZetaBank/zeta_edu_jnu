@@ -29,6 +29,7 @@ Movement Instructions
 
 Open the provided jupyter notebook
 
+-   Go to '1.Driving the Robot Examples' Folder.
 -   01_wheel.ipynb
 -   | Running the cell code
     | `Ctrl + Enter`
