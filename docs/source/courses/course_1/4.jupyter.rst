@@ -61,7 +61,3 @@ How to run code
       Ctrl + Enter
 
     .. thumbnail:: /_images/intro/cap5.png
-
-    .. thumbnail:: /_images/ai_autonomous_robot/jup8.jpg
-    
-    .. thumbnail:: /_images/ai_autonomous_robot/jup9.jpg
