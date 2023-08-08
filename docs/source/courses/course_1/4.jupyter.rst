@@ -37,22 +37,22 @@ How to connect
     
   * JupyterLab Main Page
     
-    .. thumbnail:: /_images/ai_autonomous_robot/jup3.jpg
+    .. thumbnail:: /_images/intro/cap1.png
 
 How to run code
 -----------------------
 
-  * Moving to lecture folder
+  * Moving to 'lecture' folder
   
-    .. thumbnail:: /_images/ai_autonomous_robot/jup4.jpg
+    .. thumbnail:: /_images/intro/cap2.png
     
-  * Moving to Communications folder
+  * Moving to '5.Robot Arm' folder
   
-    .. thumbnail:: /_images/ai_autonomous_robot/jup5.jpg
+    .. thumbnail:: /_images/intro/cap3.png
   
-  * Opening 01_01_ros_topic_publisher.ipynb file
+  * Opening 05_04_dance.ipynb file
   
-    .. thumbnail:: /_images/ai_autonomous_robot/jup6.jpg
+    .. thumbnail:: /_images/intro/cap4.png
     
   * Run the cells
   
@@ -60,7 +60,7 @@ How to run code
     With your team members, se
       Ctrl + Enter
 
-    .. thumbnail:: /_images/ai_autonomous_robot/jup7.jpg
+    .. thumbnail:: /_images/intro/cap5.png
 
     .. thumbnail:: /_images/ai_autonomous_robot/jup8.jpg
     
